@@ -1,0 +1,5 @@
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.DataAccess\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.DataAccess.deps.json
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.DataAccess\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.DataAccess.dll
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.DataAccess\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.DataAccess.csprojAssemblyReference.cache
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.DataAccess\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.DataAccess.AssemblyInfoInputs.cache
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.DataAccess\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.DataAccess.AssemblyInfo.cs
