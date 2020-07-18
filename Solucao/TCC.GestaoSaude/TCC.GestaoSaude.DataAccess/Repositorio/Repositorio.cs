@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TCC.GestaoSaude.DataAccess.Interface;
+using TCC.GestaoSaude.DataAccess.Contexto;
 
 namespace TCC.GestaoSaude.DataAccess.Repositorio
 {
@@ -101,7 +102,15 @@ namespace TCC.GestaoSaude.DataAccess.Repositorio
 		}
 		public virtual async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match)
 		{
-			return await _context.Set<TEntity>().SingleOrDefaultAsync(match);
+			try
+			{
+				return await _context.Set<TEntity>().SingleOrDefaultAsync(match);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+			
 		}
 
 		public virtual async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match, List<string> includes)

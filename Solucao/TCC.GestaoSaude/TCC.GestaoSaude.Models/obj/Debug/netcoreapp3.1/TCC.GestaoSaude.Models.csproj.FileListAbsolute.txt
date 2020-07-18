@@ -2,3 +2,7 @@ C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.E
 C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Models\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Models.dll
 C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Models\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Models.AssemblyInfoInputs.cache
 C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Models\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Models.AssemblyInfo.cs
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Models\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Models.pdb
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Models\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Models.csproj.CoreCompileInputs.cache
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Models\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Models.dll
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Models\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Models.pdb

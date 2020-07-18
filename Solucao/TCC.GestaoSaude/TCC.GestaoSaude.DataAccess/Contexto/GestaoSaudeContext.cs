@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using TCC.GestaoSaude.Models;
 
-namespace TCC.GestaoSaude.DataAccess
+namespace TCC.GestaoSaude.DataAccess.Contexto
 {
     public partial class GestaoSaudeContext : DbContext
     {
