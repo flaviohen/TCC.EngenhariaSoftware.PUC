@@ -1,0 +1,14 @@
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.deps.json
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.dll
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.pdb
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.DataAccess.dll
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Models.dll
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.DataAccess.pdb
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Models.pdb
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.csprojAssemblyReference.cache
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.AssemblyInfoInputs.cache
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.AssemblyInfo.cs
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.csproj.CoreCompileInputs.cache
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.csproj.CopyComplete
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.dll
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Business\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Business.pdb
