@@ -1,0 +1,11 @@
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.deps.json
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.dll
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\bin\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.pdb
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.csprojAssemblyReference.cache
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.AssemblyInfoInputs.cache
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.AssemblyInfo.cs
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.csproj.CoreCompileInputs.cache
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.dll
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.pdb
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.MensagensSistema.MsgsSistema.resources
+C:\Users\FlavioHenrique\Documents\TCC - Engenharia de Software - PUC Minas\TCC.EngenhariaSoftware.PUC\Solucao\TCC.GestaoSaude\TCC.GestaoSaude.Common\obj\Debug\netcoreapp3.1\TCC.GestaoSaude.Common.csproj.GenerateResource.cache
