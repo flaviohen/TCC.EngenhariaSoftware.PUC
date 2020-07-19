@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -13,6 +14,7 @@ namespace TCC.GestaoSaude.Models
         {
             RelUsuarioInternoPerfil = new HashSet<RelUsuarioInternoPerfil>();
             RelUsuarioPerfil = new HashSet<RelUsuarioPerfil>();
+            Mensagens = new List<Mensagem>();
         }
 
         [Key]
@@ -26,5 +28,8 @@ namespace TCC.GestaoSaude.Models
         public virtual ICollection<RelUsuarioInternoPerfil> RelUsuarioInternoPerfil { get; set; }
         [InverseProperty("A6Perfil")]
         public virtual ICollection<RelUsuarioPerfil> RelUsuarioPerfil { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

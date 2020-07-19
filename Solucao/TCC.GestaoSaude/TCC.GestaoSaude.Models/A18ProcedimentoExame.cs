@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -12,6 +13,7 @@ namespace TCC.GestaoSaude.Models
         public A18ProcedimentoExame()
         {
             RelHistoricoExamePaciente = new HashSet<RelHistoricoExamePaciente>();
+            Mensagens = new List<Mensagem>();
         }
 
         [Key]
@@ -32,5 +34,8 @@ namespace TCC.GestaoSaude.Models
 
         [InverseProperty("A18ProcedimentoExame")]
         public virtual ICollection<RelHistoricoExamePaciente> RelHistoricoExamePaciente { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

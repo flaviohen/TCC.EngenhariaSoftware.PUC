@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.GestaoSaude.Business", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.GestaoSaude.Test", "TCC.GestaoSaude.Test\TCC.GestaoSaude.Test.csproj", "{ADBFD401-E5AA-4C7D-9499-9E883F581A2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.GestaoSaude.Common", "TCC.GestaoSaude.Common\TCC.GestaoSaude.Common.csproj", "{B113D1FD-959A-4EA0-8E18-ED175453340C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{ADBFD401-E5AA-4C7D-9499-9E883F581A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADBFD401-E5AA-4C7D-9499-9E883F581A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADBFD401-E5AA-4C7D-9499-9E883F581A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B113D1FD-959A-4EA0-8E18-ED175453340C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B113D1FD-959A-4EA0-8E18-ED175453340C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B113D1FD-959A-4EA0-8E18-ED175453340C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B113D1FD-959A-4EA0-8E18-ED175453340C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

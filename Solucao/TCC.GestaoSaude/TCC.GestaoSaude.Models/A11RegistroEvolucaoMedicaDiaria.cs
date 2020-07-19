@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -12,15 +13,16 @@ namespace TCC.GestaoSaude.Models
         public A11RegistroEvolucaoMedicaDiaria()
         {
             RelHistoricoEvolucaoMedicaDiaria = new HashSet<RelHistoricoEvolucaoMedicaDiaria>();
+            Mensagens = new List<Mensagem>();
         }
 
         [Key]
         [Column("A11_RegistroEvolucaoMedicaDiaria_ID")]
         public int A11RegistroEvolucaoMedicaDiariaId { get; set; }
         [Required]
-        [Column("A13_Profissional_CodigoSus")]
+        [Column("A13_Profissional_CodigoCNS")]
         [StringLength(350)]
-        public string A13ProfissionalCodigoSus { get; set; }
+        public string A13ProfissionalCodigoCns { get; set; }
         [Column("A11_RegistroEvolucaoMedicaDiaria_Data", TypeName = "date")]
         public DateTime? A11RegistroEvolucaoMedicaDiariaData { get; set; }
         [Column("A11_RegistroEvolucaoMedicaDiaria_Hora", TypeName = "time(0)")]
@@ -29,10 +31,13 @@ namespace TCC.GestaoSaude.Models
         [StringLength(999)]
         public string A11RegistroEvolucaoMedicaDiariaDescricao { get; set; }
 
-        [ForeignKey(nameof(A13ProfissionalCodigoSus))]
+        [ForeignKey(nameof(A13ProfissionalCodigoCns))]
         [InverseProperty(nameof(A13Profissional.A11RegistroEvolucaoMedicaDiaria))]
-        public virtual A13Profissional A13ProfissionalCodigoSusNavigation { get; set; }
+        public virtual A13Profissional A13ProfissionalCodigoCnsNavigation { get; set; }
         [InverseProperty("A11RegistroEvolucaoMedicaDiaria")]
         public virtual ICollection<RelHistoricoEvolucaoMedicaDiaria> RelHistoricoEvolucaoMedicaDiaria { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

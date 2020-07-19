@@ -46,46 +46,47 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
         public virtual DbSet<RelProfissionalOcupacao> RelProfissionalOcupacao { get; set; }
         public virtual DbSet<RelProntuarioRecomendacaoMedica> RelProntuarioRecomendacaoMedica { get; set; }
         public virtual DbSet<RelUsuarioInternoPerfil> RelUsuarioInternoPerfil { get; set; }
+        public virtual DbSet<RelUsuarioInternoProfissional> RelUsuarioInternoProfissional { get; set; }
         public virtual DbSet<RelUsuarioPerfil> RelUsuarioPerfil { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<A10RegistroEvolucaoEnfermagem>(entity =>
             {
-                entity.HasIndex(e => e.A13ProfissionalCodigoSus)
+                entity.HasIndex(e => e.A13ProfissionalCodigoCns)
                     .HasName("A10_RegistroEvolucaoEnfermagem_FKIndex1");
 
                 entity.Property(e => e.A10RegistroEvolucaoEnfermagemDescrição).IsUnicode(false);
 
-                entity.Property(e => e.A13ProfissionalCodigoSus).IsUnicode(false);
+                entity.Property(e => e.A13ProfissionalCodigoCns).IsUnicode(false);
 
-                entity.HasOne(d => d.A13ProfissionalCodigoSusNavigation)
+                entity.HasOne(d => d.A13ProfissionalCodigoCnsNavigation)
                     .WithMany(p => p.A10RegistroEvolucaoEnfermagem)
-                    .HasForeignKey(d => d.A13ProfissionalCodigoSus)
+                    .HasForeignKey(d => d.A13ProfissionalCodigoCns)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A10_Regis__A13_P__6ABAD62E");
+                    .HasConstraintName("FK__A10_Regis__A13_P__119F9925");
             });
 
             modelBuilder.Entity<A11RegistroEvolucaoMedicaDiaria>(entity =>
             {
-                entity.HasIndex(e => e.A13ProfissionalCodigoSus)
+                entity.HasIndex(e => e.A13ProfissionalCodigoCns)
                     .HasName("A11_RegistroEvolucaoMedicaDiaria_FKIndex1");
 
                 entity.Property(e => e.A11RegistroEvolucaoMedicaDiariaDescricao).IsUnicode(false);
 
-                entity.Property(e => e.A13ProfissionalCodigoSus).IsUnicode(false);
+                entity.Property(e => e.A13ProfissionalCodigoCns).IsUnicode(false);
 
-                entity.HasOne(d => d.A13ProfissionalCodigoSusNavigation)
+                entity.HasOne(d => d.A13ProfissionalCodigoCnsNavigation)
                     .WithMany(p => p.A11RegistroEvolucaoMedicaDiaria)
-                    .HasForeignKey(d => d.A13ProfissionalCodigoSus)
+                    .HasForeignKey(d => d.A13ProfissionalCodigoCns)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A11_Regis__A13_P__67DE6983");
+                    .HasConstraintName("FK__A11_Regis__A13_P__147C05D0");
             });
 
             modelBuilder.Entity<A12Ocupacao>(entity =>
             {
                 entity.HasKey(e => e.A12OcupacaoCodigo)
-                    .HasName("PK__A12_Ocup__DA9D2023CDA3D3AB");
+                    .HasName("PK__A12_Ocup__DA9D20237530196E");
 
                 entity.Property(e => e.A12OcupacaoCodigo).IsUnicode(false);
 
@@ -94,32 +95,28 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
 
             modelBuilder.Entity<A13Profissional>(entity =>
             {
-                entity.HasKey(e => e.A13ProfissionalCodigoSus)
-                    .HasName("PK__A13_Prof__CD06EFDEF3F61B0A");
-
-                entity.Property(e => e.A13ProfissionalCodigoSus).IsUnicode(false);
+                entity.HasKey(e => e.A13ProfissionalCodigoCns)
+                    .HasName("PK__A13_Prof__C8862CDCA1B0250C");
 
                 entity.Property(e => e.A13ProfissionalCodigoCns).IsUnicode(false);
+
+                entity.Property(e => e.A13ProfissionalCodigoSus).IsUnicode(false);
 
                 entity.Property(e => e.A13ProfissionalNome).IsUnicode(false);
             });
 
             modelBuilder.Entity<A15CargaHorariaProfissional>(entity =>
             {
-                entity.HasIndex(e => e.A13ProfissionalCodigoSus)
+                entity.HasIndex(e => e.A13ProfissionalCodigoCns)
                     .HasName("A15_CargaHorariaProfissional_FKIndex1");
 
-                entity.Property(e => e.A15CargaHorariaProfissionalId).ValueGeneratedNever();
+                entity.Property(e => e.A13ProfissionalCodigoCns).IsUnicode(false);
 
-                entity.Property(e => e.A13ProfissionalCodigoSus).IsUnicode(false);
-
-                entity.Property(e => e.A15CargaHorariaProfissionalQtCargaHorariaAmbulatorial).ValueGeneratedOnAdd();
-
-                entity.HasOne(d => d.A13ProfissionalCodigoSusNavigation)
+                entity.HasOne(d => d.A13ProfissionalCodigoCnsNavigation)
                     .WithMany(p => p.A15CargaHorariaProfissional)
-                    .HasForeignKey(d => d.A13ProfissionalCodigoSus)
+                    .HasForeignKey(d => d.A13ProfissionalCodigoCns)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A15_Carga__A13_P__6501FCD8");
+                    .HasConstraintName("FK__A15_Carga__A13_P__22CA2527");
             });
 
             modelBuilder.Entity<A18ProcedimentoExame>(entity =>
@@ -135,8 +132,6 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
 
             modelBuilder.Entity<A1Usuario>(entity =>
             {
-                entity.Property(e => e.A1UsuarioId).ValueGeneratedNever();
-
                 entity.Property(e => e.A1UsuarioNome).IsUnicode(false);
 
                 entity.Property(e => e.A1UsuarioNumeroCpf).IsUnicode(false);
@@ -192,7 +187,7 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.A21Estabelecimento)
                     .HasForeignKey(d => d.A20TipoEstabelecimentoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A21_Estab__A20_T__7073AF84");
+                    .HasConstraintName("FK__A21_Estab__A20_T__1D114BD1");
             });
 
             modelBuilder.Entity<A22Agenda>(entity =>
@@ -209,13 +204,13 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.A22Agenda)
                     .HasForeignKey(d => d.A12OcupacaoCodigo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A22_Agend__A12_O__0B27A5C0");
+                    .HasConstraintName("FK__A22_Agend__A12_O__414EAC47");
 
                 entity.HasOne(d => d.A23TipoAgenda)
                     .WithMany(p => p.A22Agenda)
                     .HasForeignKey(d => d.A23TipoAgendaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A22_Agend__A23_T__0A338187");
+                    .HasConstraintName("FK__A22_Agend__A23_T__405A880E");
             });
 
             modelBuilder.Entity<A23TipoAgenda>(entity =>
@@ -225,18 +220,18 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
 
             modelBuilder.Entity<A24RecomendacaoMedica>(entity =>
             {
-                entity.HasIndex(e => e.A13ProfissionalCodigoSus)
+                entity.HasIndex(e => e.A13ProfissionalCodigoCns)
                     .HasName("A24_RecomendacaoMedica_FKIndex1");
 
-                entity.Property(e => e.A13ProfissionalCodigoSus).IsUnicode(false);
+                entity.Property(e => e.A13ProfissionalCodigoCns).IsUnicode(false);
 
                 entity.Property(e => e.A24RecomendacaoMedicaRecomendacao).IsUnicode(false);
 
-                entity.HasOne(d => d.A13ProfissionalCodigoSusNavigation)
+                entity.HasOne(d => d.A13ProfissionalCodigoCnsNavigation)
                     .WithMany(p => p.A24RecomendacaoMedica)
-                    .HasForeignKey(d => d.A13ProfissionalCodigoSus)
+                    .HasForeignKey(d => d.A13ProfissionalCodigoCns)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A24_Recom__A13_P__6D9742D9");
+                    .HasConstraintName("FK__A24_Recom__A13_P__1A34DF26");
             });
 
             modelBuilder.Entity<A26Leito>(entity =>
@@ -260,7 +255,7 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.A29Atendimento)
                     .HasForeignKey(d => d.A3InformacaoCadastroId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A29_Atend__A3_In__6225902D");
+                    .HasConstraintName("FK__A29_Atend__A3_In__1FEDB87C");
             });
 
             modelBuilder.Entity<A2UsuarioInterno>(entity =>
@@ -278,8 +273,6 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
             {
                 entity.HasIndex(e => e.A1UsuarioId)
                     .HasName("A3_InformacaoCadastro_FKIndex1");
-
-                entity.Property(e => e.A3InformacaoCadastroId).ValueGeneratedNever();
 
                 entity.Property(e => e.A3InformacaoCadastroCelular).IsUnicode(false);
 
@@ -299,7 +292,7 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.A3InformacaoCadastro)
                     .HasForeignKey(d => d.A1UsuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A3_Inform__A1_Us__5F492382");
+                    .HasConstraintName("FK__A3_Inform__A1_Us__0BE6BFCF");
             });
 
             modelBuilder.Entity<A4CartaoVacinacao>(entity =>
@@ -311,7 +304,7 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.A4CartaoVacinacao)
                     .HasForeignKey(d => d.A3InformacaoCadastroId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A4_Cartao__A3_In__1A69E950");
+                    .HasConstraintName("FK__A4_Cartao__A3_In__0EC32C7A");
             });
 
             modelBuilder.Entity<A5Vacina>(entity =>
@@ -325,7 +318,7 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.A5Vacina)
                     .HasForeignKey(d => d.A4CartaoVacinacaoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__A5_Vacina__A4_Ca__1D4655FB");
+                    .HasConstraintName("FK__A5_Vacina__A4_Ca__1758727B");
             });
 
             modelBuilder.Entity<A6Perfil>(entity =>
@@ -351,7 +344,7 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
             modelBuilder.Entity<RelAtendimentoProntuario>(entity =>
             {
                 entity.HasKey(e => new { e.A29AtendimentoId, e.A9ProntuarioId })
-                    .HasName("PK__Rel_Aten__85EB3D10AACD0621");
+                    .HasName("PK__Rel_Aten__85EB3D10F22C6FFC");
 
                 entity.HasIndex(e => e.A29AtendimentoId)
                     .HasName("A29_Atendimento_has_A9_Prontuario_FKIndex1");
@@ -363,19 +356,19 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.RelAtendimentoProntuario)
                     .HasForeignKey(d => d.A29AtendimentoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Atend__A29_A__0662F0A3");
+                    .HasConstraintName("FK__Rel_Atend__A29_A__38B96646");
 
                 entity.HasOne(d => d.A9Prontuario)
                     .WithMany(p => p.RelAtendimentoProntuario)
                     .HasForeignKey(d => d.A9ProntuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Atend__A9_Pr__075714DC");
+                    .HasConstraintName("FK__Rel_Atend__A9_Pr__39AD8A7F");
             });
 
             modelBuilder.Entity<RelEstabelecimentoLeito>(entity =>
             {
                 entity.HasKey(e => new { e.A21EstabelecimentoId, e.A26LeitoId })
-                    .HasName("PK__Rel_Esta__95DACE639E566FB5");
+                    .HasName("PK__Rel_Esta__95DACE6313A5E632");
 
                 entity.HasIndex(e => e.A21EstabelecimentoId)
                     .HasName("A21_Estabelecimento_has_A26_Leito_FKIndex1");
@@ -387,19 +380,19 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.RelEstabelecimentoLeito)
                     .HasForeignKey(d => d.A21EstabelecimentoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Estab__A21_E__0E04126B");
+                    .HasConstraintName("FK__Rel_Estab__A21_E__47FBA9D6");
 
                 entity.HasOne(d => d.A26Leito)
                     .WithMany(p => p.RelEstabelecimentoLeito)
                     .HasForeignKey(d => d.A26LeitoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Estab__A26_L__0EF836A4");
+                    .HasConstraintName("FK__Rel_Estab__A26_L__48EFCE0F");
             });
 
             modelBuilder.Entity<RelHistoricoEvolucaoEnfermagem>(entity =>
             {
                 entity.HasKey(e => new { e.A9ProntuarioId, e.A10RegistroEvolucaoEnfermagemId })
-                    .HasName("PK__Rel_Hist__1224C31378AA539A");
+                    .HasName("PK__Rel_Hist__1224C31367F87180");
 
                 entity.HasIndex(e => e.A10RegistroEvolucaoEnfermagemId)
                     .HasName("A9_Prontuario_has_A10_RegistroEvolucaoEnfermagem_FKIndex2");
@@ -411,19 +404,19 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.RelHistoricoEvolucaoEnfermagem)
                     .HasForeignKey(d => d.A10RegistroEvolucaoEnfermagemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Histo__A10_R__12C8C788");
+                    .HasConstraintName("FK__Rel_Histo__A10_R__451F3D2B");
 
                 entity.HasOne(d => d.A9Prontuario)
                     .WithMany(p => p.RelHistoricoEvolucaoEnfermagem)
                     .HasForeignKey(d => d.A9ProntuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Histo__A9_Pr__11D4A34F");
+                    .HasConstraintName("FK__Rel_Histo__A9_Pr__442B18F2");
             });
 
             modelBuilder.Entity<RelHistoricoEvolucaoMedicaDiaria>(entity =>
             {
                 entity.HasKey(e => new { e.A9ProntuarioId, e.A11RegistroEvolucaoMedicaDiariaId })
-                    .HasName("PK__Rel_Hist__91314D8FB0B47B83");
+                    .HasName("PK__Rel_Hist__91314D8FDAF3972B");
 
                 entity.HasIndex(e => e.A11RegistroEvolucaoMedicaDiariaId)
                     .HasName("A9_Prontuario_has_A11_RegistroEvolucaoMedicaDiaria_FKIndex2");
@@ -435,19 +428,19 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.RelHistoricoEvolucaoMedicaDiaria)
                     .HasForeignKey(d => d.A11RegistroEvolucaoMedicaDiariaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Histo__A11_R__038683F8");
+                    .HasConstraintName("FK__Rel_Histo__A11_R__2A6B46EF");
 
                 entity.HasOne(d => d.A9Prontuario)
                     .WithMany(p => p.RelHistoricoEvolucaoMedicaDiaria)
                     .HasForeignKey(d => d.A9ProntuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Histo__A9_Pr__02925FBF");
+                    .HasConstraintName("FK__Rel_Histo__A9_Pr__297722B6");
             });
 
             modelBuilder.Entity<RelHistoricoExamePaciente>(entity =>
             {
                 entity.HasKey(e => new { e.A9ProntuarioId, e.A18ProcedimentoExameId })
-                    .HasName("PK__Rel_Hist__9BEB42469C78F278");
+                    .HasName("PK__Rel_Hist__9BEB4246DC50ADF1");
 
                 entity.HasIndex(e => e.A18ProcedimentoExameId)
                     .HasName("A9_Prontuario_has_A18_ProcedimentoExame_FKIndex2");
@@ -459,56 +452,56 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.RelHistoricoExamePaciente)
                     .HasForeignKey(d => d.A18ProcedimentoExameId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Histo__A18_P__7814D14C");
+                    .HasConstraintName("FK__Rel_Histo__A18_P__269AB60B");
 
                 entity.HasOne(d => d.A9Prontuario)
                     .WithMany(p => p.RelHistoricoExamePaciente)
                     .HasForeignKey(d => d.A9ProntuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Histo__A9_Pr__7720AD13");
+                    .HasConstraintName("FK__Rel_Histo__A9_Pr__25A691D2");
             });
 
             modelBuilder.Entity<RelProfissionalOcupacao>(entity =>
             {
-                entity.HasKey(e => new { e.A13ProfissionalCodigoSus, e.A12OcupacaoCodigo })
-                    .HasName("PK__Rel_Prof__E0AF3DDC75C0E1AE");
+                entity.HasKey(e => new { e.A12OcupacaoCodigo, e.A13ProfissionalCodigoCns })
+                    .HasName("PK__Rel_Prof__061542EEE31DB999");
 
                 entity.HasIndex(e => e.A12OcupacaoCodigo)
                     .HasName("A13_Profissional_has_A12_Ocupacao_FKIndex2");
 
-                entity.HasIndex(e => e.A13ProfissionalCodigoSus)
+                entity.HasIndex(e => e.A13ProfissionalCodigoCns)
                     .HasName("A13_Profissional_has_A12_Ocupacao_FKIndex1");
 
                 entity.HasIndex(e => e.A21EstabelecimentoId)
                     .HasName("Rel_ProfissionalOcupacao_FKIndex3");
 
-                entity.Property(e => e.A13ProfissionalCodigoSus).IsUnicode(false);
-
                 entity.Property(e => e.A12OcupacaoCodigo).IsUnicode(false);
+
+                entity.Property(e => e.A13ProfissionalCodigoCns).IsUnicode(false);
 
                 entity.HasOne(d => d.A12OcupacaoCodigoNavigation)
                     .WithMany(p => p.RelProfissionalOcupacao)
                     .HasForeignKey(d => d.A12OcupacaoCodigo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Profi__A12_O__1699586C");
+                    .HasConstraintName("FK__Rel_Profi__A12_O__4CC05EF3");
 
-                entity.HasOne(d => d.A13ProfissionalCodigoSusNavigation)
+                entity.HasOne(d => d.A13ProfissionalCodigoCnsNavigation)
                     .WithMany(p => p.RelProfissionalOcupacao)
-                    .HasForeignKey(d => d.A13ProfissionalCodigoSus)
+                    .HasForeignKey(d => d.A13ProfissionalCodigoCns)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Profi__A13_P__15A53433");
+                    .HasConstraintName("FK__Rel_Profi__A13_P__4BCC3ABA");
 
                 entity.HasOne(d => d.A21Estabelecimento)
                     .WithMany(p => p.RelProfissionalOcupacao)
                     .HasForeignKey(d => d.A21EstabelecimentoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Profi__A21_E__178D7CA5");
+                    .HasConstraintName("FK__Rel_Profi__A21_E__4DB4832C");
             });
 
             modelBuilder.Entity<RelProntuarioRecomendacaoMedica>(entity =>
             {
                 entity.HasKey(e => new { e.A9ProntuarioId, e.A24RecomendacaoMedicaId })
-                    .HasName("PK__Rel_Pron__B9E48F1C9B43C934");
+                    .HasName("PK__Rel_Pron__B9E48F1CFF3B3697");
 
                 entity.HasIndex(e => e.A24RecomendacaoMedicaId)
                     .HasName("A9_Prontuario_has_A24_RecomendacaoMedica_FKIndex2");
@@ -520,19 +513,19 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.RelProntuarioRecomendacaoMedica)
                     .HasForeignKey(d => d.A24RecomendacaoMedicaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Pront__A24_R__74444068");
+                    .HasConstraintName("FK__Rel_Pront__A24_R__2E3BD7D3");
 
                 entity.HasOne(d => d.A9Prontuario)
                     .WithMany(p => p.RelProntuarioRecomendacaoMedica)
                     .HasForeignKey(d => d.A9ProntuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Pront__A9_Pr__73501C2F");
+                    .HasConstraintName("FK__Rel_Pront__A9_Pr__2D47B39A");
             });
 
             modelBuilder.Entity<RelUsuarioInternoPerfil>(entity =>
             {
                 entity.HasKey(e => new { e.A2UsuarioInternoId, e.A6PerfilId })
-                    .HasName("PK__Rel_Usua__A7FD08840A0EEB95");
+                    .HasName("PK__Rel_Usua__A7FD08844B04CC3E");
 
                 entity.HasIndex(e => e.A2UsuarioInternoId)
                     .HasName("A2_UsuarioInterno_has_A6_Perfil_FKIndex1");
@@ -544,19 +537,45 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.RelUsuarioInternoPerfil)
                     .HasForeignKey(d => d.A2UsuarioInternoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Usuar__A2_Us__7EC1CEDB");
+                    .HasConstraintName("FK__Rel_Usuar__A2_Us__34E8D562");
 
                 entity.HasOne(d => d.A6Perfil)
                     .WithMany(p => p.RelUsuarioInternoPerfil)
                     .HasForeignKey(d => d.A6PerfilId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Usuar__A6_Pe__7FB5F314");
+                    .HasConstraintName("FK__Rel_Usuar__A6_Pe__35DCF99B");
+            });
+
+            modelBuilder.Entity<RelUsuarioInternoProfissional>(entity =>
+            {
+                entity.HasKey(e => new { e.A2UsuarioInternoId, e.A13ProfissionalCodigoCns })
+                    .HasName("PK__RelUsuar__FF21DB73405BA319");
+
+                entity.HasIndex(e => e.A13ProfissionalCodigoCns)
+                    .HasName("A2_UsuarioInterno_has_A13_Profissional_FKIndex2");
+
+                entity.HasIndex(e => e.A2UsuarioInternoId)
+                    .HasName("A2_UsuarioInterno_has_A13_Profissional_FKIndex1");
+
+                entity.Property(e => e.A13ProfissionalCodigoCns).IsUnicode(false);
+
+                entity.HasOne(d => d.A13ProfissionalCodigoCnsNavigation)
+                    .WithMany(p => p.RelUsuarioInternoProfissional)
+                    .HasForeignKey(d => d.A13ProfissionalCodigoCns)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__RelUsuari__A13_P__3D7E1B63");
+
+                entity.HasOne(d => d.A2UsuarioInterno)
+                    .WithMany(p => p.RelUsuarioInternoProfissional)
+                    .HasForeignKey(d => d.A2UsuarioInternoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__RelUsuari__A2_Us__3C89F72A");
             });
 
             modelBuilder.Entity<RelUsuarioPerfil>(entity =>
             {
                 entity.HasKey(e => new { e.A1UsuarioId, e.A6PerfilId })
-                    .HasName("PK__Rel_Usua__DEF6D35C55AD93C1");
+                    .HasName("PK__Rel_Usua__DEF6D35C4FA02F41");
 
                 entity.HasIndex(e => e.A1UsuarioId)
                     .HasName("A1_Usuario_has_A6_Perfil_FKIndex1");
@@ -568,13 +587,13 @@ namespace TCC.GestaoSaude.DataAccess.Contexto
                     .WithMany(p => p.RelUsuarioPerfil)
                     .HasForeignKey(d => d.A1UsuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Usuar__A1_Us__7AF13DF7");
+                    .HasConstraintName("FK__Rel_Usuar__A1_Us__3118447E");
 
                 entity.HasOne(d => d.A6Perfil)
                     .WithMany(p => p.RelUsuarioPerfil)
                     .HasForeignKey(d => d.A6PerfilId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rel_Usuar__A6_Pe__7BE56230");
+                    .HasConstraintName("FK__Rel_Usuar__A6_Pe__320C68B7");
             });
 
             OnModelCreatingPartial(modelBuilder);

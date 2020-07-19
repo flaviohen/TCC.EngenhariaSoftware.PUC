@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -12,6 +13,7 @@ namespace TCC.GestaoSaude.Models
         public A23TipoAgenda()
         {
             A22Agenda = new HashSet<A22Agenda>();
+            Mensagens = new List<Mensagem>();
         }
 
         [Key]
@@ -23,5 +25,8 @@ namespace TCC.GestaoSaude.Models
 
         [InverseProperty("A23TipoAgenda")]
         public virtual ICollection<A22Agenda> A22Agenda { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

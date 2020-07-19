@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -18,5 +19,8 @@ namespace TCC.GestaoSaude.Models
         [Column("A28_CodigoInternacionalDoenca_Valor")]
         [StringLength(150)]
         public string A28CodigoInternacionalDoencaValor { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

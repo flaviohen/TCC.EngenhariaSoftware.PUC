@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -12,15 +13,16 @@ namespace TCC.GestaoSaude.Models
         public A24RecomendacaoMedica()
         {
             RelProntuarioRecomendacaoMedica = new HashSet<RelProntuarioRecomendacaoMedica>();
+            Mensagens = new List<Mensagem>();
         }
 
         [Key]
         [Column("A24_RecomendacaoMedica_ID")]
         public int A24RecomendacaoMedicaId { get; set; }
         [Required]
-        [Column("A13_Profissional_CodigoSus")]
+        [Column("A13_Profissional_CodigoCNS")]
         [StringLength(350)]
-        public string A13ProfissionalCodigoSus { get; set; }
+        public string A13ProfissionalCodigoCns { get; set; }
         [Column("A24_RecomendacaoMedica_Recomendacao")]
         [StringLength(500)]
         public string A24RecomendacaoMedicaRecomendacao { get; set; }
@@ -29,10 +31,13 @@ namespace TCC.GestaoSaude.Models
         [Column("A24_RecomendacaoMedica_Hora", TypeName = "time(0)")]
         public TimeSpan? A24RecomendacaoMedicaHora { get; set; }
 
-        [ForeignKey(nameof(A13ProfissionalCodigoSus))]
+        [ForeignKey(nameof(A13ProfissionalCodigoCns))]
         [InverseProperty(nameof(A13Profissional.A24RecomendacaoMedica))]
-        public virtual A13Profissional A13ProfissionalCodigoSusNavigation { get; set; }
+        public virtual A13Profissional A13ProfissionalCodigoCnsNavigation { get; set; }
         [InverseProperty("A24RecomendacaoMedica")]
         public virtual ICollection<RelProntuarioRecomendacaoMedica> RelProntuarioRecomendacaoMedica { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

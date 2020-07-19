@@ -3309,6 +3309,16 @@
           "bin/placeholder/TCC.GestaoSaude.Business.dll": {}
         }
       },
+      "TCC.GestaoSaude.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/TCC.GestaoSaude.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TCC.GestaoSaude.Common.dll": {}
+        }
+      },
       "TCC.GestaoSaude.DataAccess/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -3328,7 +3338,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.6"
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.6",
+          "TCC.GestaoSaude.Common": "1.0.0"
         },
         "compile": {
           "bin/placeholder/TCC.GestaoSaude.Models.dll": {}
@@ -9878,6 +9889,11 @@
       "type": "project",
       "path": "../TCC.GestaoSaude.Business/TCC.GestaoSaude.Business.csproj",
       "msbuildProject": "../TCC.GestaoSaude.Business/TCC.GestaoSaude.Business.csproj"
+    },
+    "TCC.GestaoSaude.Common/1.0.0": {
+      "type": "project",
+      "path": "../TCC.GestaoSaude.Common/TCC.GestaoSaude.Common.csproj",
+      "msbuildProject": "../TCC.GestaoSaude.Common/TCC.GestaoSaude.Common.csproj"
     },
     "TCC.GestaoSaude.DataAccess/1.0.0": {
       "type": "project",

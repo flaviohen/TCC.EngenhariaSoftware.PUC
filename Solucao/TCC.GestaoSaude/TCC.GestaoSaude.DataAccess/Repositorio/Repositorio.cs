@@ -102,15 +102,7 @@ namespace TCC.GestaoSaude.DataAccess.Repositorio
 		}
 		public virtual async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match)
 		{
-			try
-			{
-				return await _context.Set<TEntity>().SingleOrDefaultAsync(match);
-			}
-			catch (Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
-			
+			return await _context.Set<TEntity>().SingleOrDefaultAsync(match);
 		}
 
 		public virtual async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match, List<string> includes)

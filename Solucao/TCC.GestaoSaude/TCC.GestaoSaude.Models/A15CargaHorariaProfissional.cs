@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -13,16 +14,19 @@ namespace TCC.GestaoSaude.Models
         [Column("A15_CargaHorariaProfissional_ID")]
         public int A15CargaHorariaProfissionalId { get; set; }
         [Required]
-        [Column("A13_Profissional_CodigoSus")]
+        [Column("A13_Profissional_CodigoCNS")]
         [StringLength(350)]
-        public string A13ProfissionalCodigoSus { get; set; }
+        public string A13ProfissionalCodigoCns { get; set; }
         [Column("A15_CargaHorariaProfissional_QtCargaHorariaAmbulatorial")]
         public int A15CargaHorariaProfissionalQtCargaHorariaAmbulatorial { get; set; }
         [Column("A15_Data", TypeName = "datetime2(0)")]
         public DateTime? A15Data { get; set; }
 
-        [ForeignKey(nameof(A13ProfissionalCodigoSus))]
+        [ForeignKey(nameof(A13ProfissionalCodigoCns))]
         [InverseProperty(nameof(A13Profissional.A15CargaHorariaProfissional))]
-        public virtual A13Profissional A13ProfissionalCodigoSusNavigation { get; set; }
+        public virtual A13Profissional A13ProfissionalCodigoCnsNavigation { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

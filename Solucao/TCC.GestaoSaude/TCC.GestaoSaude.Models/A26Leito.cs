@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -12,6 +13,7 @@ namespace TCC.GestaoSaude.Models
         public A26Leito()
         {
             RelEstabelecimentoLeito = new HashSet<RelEstabelecimentoLeito>();
+            Mensagens = new List<Mensagem>();
         }
 
         [Key]
@@ -27,5 +29,8 @@ namespace TCC.GestaoSaude.Models
 
         [InverseProperty("A26Leito")]
         public virtual ICollection<RelEstabelecimentoLeito> RelEstabelecimentoLeito { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

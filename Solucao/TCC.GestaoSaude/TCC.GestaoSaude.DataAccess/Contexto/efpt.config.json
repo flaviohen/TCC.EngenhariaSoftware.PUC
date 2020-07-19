@@ -131,6 +131,10 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[Rel_UsuarioPerfil]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[RelUsuarioInternoProfissional]"
       }
    ],
    "UseDatabaseNames": false,

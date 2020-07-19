@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -35,5 +36,8 @@ namespace TCC.GestaoSaude.Models
         [ForeignKey(nameof(A23TipoAgendaId))]
         [InverseProperty("A22Agenda")]
         public virtual A23TipoAgenda A23TipoAgenda { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

@@ -4,45 +4,133 @@ using System.Text;
 using System.Threading.Tasks;
 using TCC.GestaoSaude.DataAccess.Interface;
 using TCC.GestaoSaude.Models;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Business
 {
 	public class A1UsuarioBusiness
 	{
 		private readonly IA1UsuarioRepositorio _usuarioRepositorio;
-		public A1UsuarioBusiness(IA1UsuarioRepositorio usuarioRepositorio)
+		private readonly IA2UsuarioInternoRepositorio _usuarioInternoRepositorio;
+		private readonly IA6PerfilRepositorio _perfilRepositorio;
+		private readonly IA13ProfissionalRepositorio _profissionalRepositorio;
+		public A1UsuarioBusiness(IA1UsuarioRepositorio usuarioRepositorio, IA2UsuarioInternoRepositorio usuarioInternoRepositorio, IA6PerfilRepositorio perfilRepositorio, IA13ProfissionalRepositorio profissionalRepositorio)
 		{
 			_usuarioRepositorio = usuarioRepositorio;
+			_usuarioInternoRepositorio = usuarioInternoRepositorio;
+			_perfilRepositorio = perfilRepositorio;
+			_profissionalRepositorio = profissionalRepositorio;
 		}
-		public A1Usuario Logar(A1Usuario usuario) 
+
+		public bool LogarInterno(A2UsuarioInterno usuarioInterno)
 		{
-			try
+			if (Autenticar(null, usuarioInterno, Enumeradores.ModoAutenticacao.LogarInterno))
+				return true;
+			else
+				return false;
+		}
+		public bool Logar(A1Usuario usuario) 
+		{
+			if (Autenticar(usuario, null, Enumeradores.ModoAutenticacao.LogarPaciente))
+				return true;
+			else
+				return false;
+		}
+
+		public bool CriarLogin(A1Usuario usuario) 
+		{
+			bool retorno = true;
+			if (Autenticar(usuario, null, Enumeradores.ModoAutenticacao.CriarLogin))
 			{
-				List<string> includes = new List<string>();
-				includes.Add("RelUsuarioPerfil");
-				var usuarioBuscado =  _usuarioRepositorio.FindAsync(c => c.A1UsuarioNumeroCpf == usuario.A1UsuarioNumeroCpf).Result;
-				if (usuarioBuscado != null)
-				{
-					if (usuarioBuscado.A1UsuarioSenha.Equals(usuario.A1UsuarioSenha))
-					{
-						return usuarioBuscado;
-					}
-					else 
-					{
-						usuarioBuscado = null;
-						return usuarioBuscado;
-					}
-				}
-				else 
-				{
-					usuarioBuscado = null;
-					return usuarioBuscado;
-				}
+				_usuarioRepositorio.Add(usuario);
+				_usuarioRepositorio.Save();
+
+				retorno = usuario.A1UsuarioId > 0;
 			}
-			catch (Exception ex)
+			else 
 			{
-				throw new Exception(ex.Message);
+				retorno = false;
 			}
+
+			return retorno;
+		}
+
+		private bool Autenticar(A1Usuario usuarioPaciente, A2UsuarioInterno usuarioInterno, Enumeradores.ModoAutenticacao modoAutenticacao) 
+		{
+			Mensagem mensagem = new Mensagem();
+			mensagem.TipoMensagem = TipoMensagem.Atencao;
+			bool retorno = true;
+			switch (modoAutenticacao)
+			{
+				case Enumeradores.ModoAutenticacao.CriarLogin:
+					var usuarioExistente = _usuarioRepositorio.Find(c => c.A1UsuarioNumeroCpf == usuarioPaciente.A1UsuarioNumeroCpf);
+					if (usuarioExistente != null) 
+					{
+						mensagem.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgUsuarioExistente;
+						usuarioPaciente.Mensagens.Add(mensagem);
+						retorno = false;
+					}
+					break;
+				case Enumeradores.ModoAutenticacao.LogarInterno:
+
+					List<string> includes = new List<string>();
+					includes.Add("RelUsuarioInternoPerfil");
+					includes.Add("RelUsuarioInternoProfissional");
+
+					var usuarioInternoExistente = _usuarioInternoRepositorio.Find(c => c.A2UsuarioInternoEmail == usuarioInterno.A2UsuarioInternoEmail, includes);
+					if (usuarioInternoExistente == null) 
+					{
+						mensagem.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgUsuarioInternoNaoExiste;
+						retorno = false;
+					}
+					if (usuarioInterno != null) 
+					{
+						if (usuarioInterno.A2UsuarioInternoSenha != usuarioInternoExistente.A2UsuarioInternoSenha)
+						{
+							mensagem.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgSenhaIncorreta;
+							usuarioPaciente.Mensagens.Add(mensagem);
+							retorno = false;
+						}
+						else 
+						{
+							usuarioInterno.RelUsuarioInternoPerfil = usuarioInternoExistente.RelUsuarioInternoPerfil;
+							usuarioInterno.RelUsuarioInternoProfissional = usuarioInternoExistente.RelUsuarioInternoProfissional;
+
+							foreach (var item in usuarioInterno.RelUsuarioInternoPerfil)
+							{
+								item.A6Perfil = _perfilRepositorio.Find(c => c.A6PerfilId == item.A6PerfilId);
+							}
+							foreach (var item in usuarioInterno.RelUsuarioInternoProfissional)
+							{
+								item.A13ProfissionalCodigoCnsNavigation = _profissionalRepositorio.Find(c => c.A13ProfissionalCodigoCns == item.A13ProfissionalCodigoCns);
+							}
+						}
+					}
+					break;
+				case Enumeradores.ModoAutenticacao.LogarPaciente:
+					var usuarioLogar = _usuarioRepositorio.Find(c => c.A1UsuarioNumeroCpf == usuarioPaciente.A1UsuarioNumeroCpf);
+					if (usuarioLogar == null) 
+					{
+						mensagem.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgUsuarioNaoExiste;
+						usuarioPaciente.Mensagens.Add(mensagem);
+						retorno = false;
+					}
+					
+					if (usuarioLogar != null)
+					{
+						if (usuarioPaciente.A1UsuarioSenha != usuarioLogar.A1UsuarioSenha)
+						{
+							mensagem.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgSenhaIncorreta;
+							usuarioPaciente.Mensagens.Add(mensagem);
+							retorno = false;
+						}
+					}
+					break;
+				default:
+					break;
+			}
+
+			return retorno;
 		}
 	}
 }

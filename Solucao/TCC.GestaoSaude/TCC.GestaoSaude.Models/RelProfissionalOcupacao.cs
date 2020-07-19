@@ -10,22 +10,22 @@ namespace TCC.GestaoSaude.Models
     public partial class RelProfissionalOcupacao
     {
         [Key]
-        [Column("A13_Profissional_CodigoSus")]
-        [StringLength(350)]
-        public string A13ProfissionalCodigoSus { get; set; }
-        [Key]
         [Column("A12_Ocupacao_Codigo")]
         [StringLength(250)]
         public string A12OcupacaoCodigo { get; set; }
+        [Key]
+        [Column("A13_Profissional_CodigoCNS")]
+        [StringLength(350)]
+        public string A13ProfissionalCodigoCns { get; set; }
         [Column("A21_Estabelecimento_ID")]
         public int A21EstabelecimentoId { get; set; }
 
         [ForeignKey(nameof(A12OcupacaoCodigo))]
         [InverseProperty(nameof(A12Ocupacao.RelProfissionalOcupacao))]
         public virtual A12Ocupacao A12OcupacaoCodigoNavigation { get; set; }
-        [ForeignKey(nameof(A13ProfissionalCodigoSus))]
+        [ForeignKey(nameof(A13ProfissionalCodigoCns))]
         [InverseProperty(nameof(A13Profissional.RelProfissionalOcupacao))]
-        public virtual A13Profissional A13ProfissionalCodigoSusNavigation { get; set; }
+        public virtual A13Profissional A13ProfissionalCodigoCnsNavigation { get; set; }
         [ForeignKey(nameof(A21EstabelecimentoId))]
         [InverseProperty("RelProfissionalOcupacao")]
         public virtual A21Estabelecimento A21Estabelecimento { get; set; }

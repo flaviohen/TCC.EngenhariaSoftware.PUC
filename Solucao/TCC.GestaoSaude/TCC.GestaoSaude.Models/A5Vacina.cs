@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
@@ -23,5 +24,8 @@ namespace TCC.GestaoSaude.Models
         [ForeignKey(nameof(A4CartaoVacinacaoId))]
         [InverseProperty("A5Vacina")]
         public virtual A4CartaoVacinacao A4CartaoVacinacao { get; set; }
+
+        [NotMapped]
+        public List<Mensagem> Mensagens { get; set; }
     }
 }

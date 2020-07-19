@@ -2414,6 +2414,11 @@
           "TCC.GestaoSaude.Business.dll": {}
         }
       },
+      "TCC.GestaoSaude.Common/1.0.0": {
+        "runtime": {
+          "TCC.GestaoSaude.Common.dll": {}
+        }
+      },
       "TCC.GestaoSaude.DataAccess/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.6",
@@ -2426,7 +2431,8 @@
       },
       "TCC.GestaoSaude.Models/1.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.6"
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.6",
+          "TCC.GestaoSaude.Common": "1.0.0"
         },
         "runtime": {
           "TCC.GestaoSaude.Models.dll": {}
@@ -3883,6 +3889,11 @@
       "hashPath": "xunit.runner.visualstudio.2.4.0.nupkg.sha512"
     },
     "TCC.GestaoSaude.Business/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TCC.GestaoSaude.Common/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
