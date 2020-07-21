@@ -65,7 +65,7 @@ namespace TCC.GestaoSaude.Test
 			usuario.A1UsuarioNumeroCpf = "12312312312";
 			usuario.A1UsuarioSenha = "123456";
 
-			var retorno = new A1UsuarioBusiness(_usuarioRepositorio, _usuarioInternoRepositorio, _perfilRepositorio).CriarLogin(usuario);
+			var retorno = new A1UsuarioBusiness(_usuarioRepositorio, _usuarioInternoRepositorio, _perfilRepositorio, _profissionalRepositorio).CriarLogin(usuario);
 
 			Assert.True(retorno && usuario.Mensagens.Count == 0);
 		}

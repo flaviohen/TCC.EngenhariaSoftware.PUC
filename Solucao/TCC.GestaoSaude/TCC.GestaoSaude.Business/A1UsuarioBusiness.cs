@@ -57,11 +57,13 @@ namespace TCC.GestaoSaude.Business
 
 		private bool Autenticar(A1Usuario usuarioPaciente, A2UsuarioInterno usuarioInterno, Enumeradores.ModoAutenticacao modoAutenticacao) 
 		{
+			
 			Mensagem mensagem = new Mensagem();
 			mensagem.TipoMensagem = TipoMensagem.Atencao;
 			bool retorno = true;
 			switch (modoAutenticacao)
 			{
+				
 				case Enumeradores.ModoAutenticacao.CriarLogin:
 					var usuarioExistente = _usuarioRepositorio.Find(c => c.A1UsuarioNumeroCpf == usuarioPaciente.A1UsuarioNumeroCpf);
 					if (usuarioExistente != null) 
@@ -72,7 +74,6 @@ namespace TCC.GestaoSaude.Business
 					}
 					break;
 				case Enumeradores.ModoAutenticacao.LogarInterno:
-
 					List<string> includes = new List<string>();
 					includes.Add("RelUsuarioInternoPerfil");
 					includes.Add("RelUsuarioInternoProfissional");
@@ -108,7 +109,10 @@ namespace TCC.GestaoSaude.Business
 					}
 					break;
 				case Enumeradores.ModoAutenticacao.LogarPaciente:
-					var usuarioLogar = _usuarioRepositorio.Find(c => c.A1UsuarioNumeroCpf == usuarioPaciente.A1UsuarioNumeroCpf);
+
+					List<string> includesPaciente = new List<string>();
+					includesPaciente.Add("RelUsuarioPerfil");
+					var usuarioLogar = _usuarioRepositorio.Find(c => c.A1UsuarioNumeroCpf == usuarioPaciente.A1UsuarioNumeroCpf, includesPaciente);
 					if (usuarioLogar == null) 
 					{
 						mensagem.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgUsuarioNaoExiste;
@@ -123,6 +127,15 @@ namespace TCC.GestaoSaude.Business
 							mensagem.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgSenhaIncorreta;
 							usuarioPaciente.Mensagens.Add(mensagem);
 							retorno = false;
+						}
+						else 
+						{
+							usuarioPaciente.RelUsuarioPerfil = usuarioLogar.RelUsuarioPerfil;
+
+							foreach (var item in usuarioPaciente.RelUsuarioPerfil)
+							{
+								item.A6Perfil = _perfilRepositorio.Find(c => c.A6PerfilId == item.A6PerfilId);
+							}
 						}
 					}
 					break;

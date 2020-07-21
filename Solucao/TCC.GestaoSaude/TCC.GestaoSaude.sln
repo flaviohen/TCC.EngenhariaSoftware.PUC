@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.GestaoSaude.DataAccess", "TCC.GestaoSaude.DataAccess\TCC.GestaoSaude.DataAccess.csproj", "{4846EE0E-8605-43FE-B953-BE62FECEF5CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.GestaoSaude.Models", "TCC.GestaoSaude.Models\TCC.GestaoSaude.Models.csproj", "{0D90AB84-1C03-4A64-A966-950E447F7DDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.GestaoSaude.Models", "TCC.GestaoSaude.Models\TCC.GestaoSaude.Models.csproj", "{0D90AB84-1C03-4A64-A966-950E447F7DDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.GestaoSaude.Business", "TCC.GestaoSaude.Business\TCC.GestaoSaude.Business.csproj", "{B8616780-3F52-47BB-8146-C3B3EA62003B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.GestaoSaude.Business", "TCC.GestaoSaude.Business\TCC.GestaoSaude.Business.csproj", "{B8616780-3F52-47BB-8146-C3B3EA62003B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.GestaoSaude.Test", "TCC.GestaoSaude.Test\TCC.GestaoSaude.Test.csproj", "{ADBFD401-E5AA-4C7D-9499-9E883F581A2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.GestaoSaude.Test", "TCC.GestaoSaude.Test\TCC.GestaoSaude.Test.csproj", "{ADBFD401-E5AA-4C7D-9499-9E883F581A2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.GestaoSaude.Common", "TCC.GestaoSaude.Common\TCC.GestaoSaude.Common.csproj", "{B113D1FD-959A-4EA0-8E18-ED175453340C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.GestaoSaude.Common", "TCC.GestaoSaude.Common\TCC.GestaoSaude.Common.csproj", "{B113D1FD-959A-4EA0-8E18-ED175453340C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.GestaoSaude.View", "TCC.GestaoSaude.View\TCC.GestaoSaude.View.csproj", "{50888D79-82EE-4A66-BC19-FC1E29FE6910}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B113D1FD-959A-4EA0-8E18-ED175453340C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B113D1FD-959A-4EA0-8E18-ED175453340C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B113D1FD-959A-4EA0-8E18-ED175453340C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50888D79-82EE-4A66-BC19-FC1E29FE6910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50888D79-82EE-4A66-BC19-FC1E29FE6910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50888D79-82EE-4A66-BC19-FC1E29FE6910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50888D79-82EE-4A66-BC19-FC1E29FE6910}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
