@@ -145,5 +145,33 @@ namespace TCC.GestaoSaude.Business
 
 			return retorno;
 		}
+
+		public  A1Usuario BuscarUsuarioPorCPF(string numeroCpf)
+		{
+			A1Usuario usuario = new A1Usuario();
+			try
+			{
+				List<string> includes = new List<string>();
+				includes.Add("A3InformacaoCadastro");
+				var usuarioPesquisado = _usuarioRepositorio.Find(c => c.A1UsuarioNumeroCpf == numeroCpf, includes);
+				if (usuarioPesquisado == null)
+				{
+					usuario.Mensagens = new List<Mensagem>();
+					usuario.Mensagens.Add(Util.AdicionarMensagem(TipoMensagem.Atencao, Common.MensagensSistema.MsgsSistema.MsgUsuarioNaoExiste));
+					return usuario;
+				}
+				else 
+				{
+					return usuarioPesquisado;
+				}
+			}
+			catch (Exception ex)
+			{
+				usuario = new A1Usuario();
+				usuario.Mensagens = new List<Mensagem>();
+				usuario.Mensagens.Add(Util.AdicionarMensagem(TipoMensagem.Erro, ex.Message));
+				return usuario;
+			}
+		}
 	}
 }

@@ -60,14 +60,41 @@ namespace TCC.GestaoSaude.Test
 		[Fact]
 		public void CriarLogin() 
 		{
+			
 			A1Usuario usuario = new A1Usuario();
-			usuario.A1UsuarioNome = "TESTE";
-			usuario.A1UsuarioNumeroCpf = "12312312312";
+			usuario.A1UsuarioNome = "TESTE2";
+			usuario.A1UsuarioNumeroCpf = "33333333344";
 			usuario.A1UsuarioSenha = "123456";
+
+			A3InformacaoCadastro informacao = new A3InformacaoCadastro();
+			informacao.A3InformacaoCadastroCelular = "11955556666";
+			informacao.A3InformacaoCadastroDataNascimento = new DateTime(1988, 9, 16);
+			informacao.A3InformacaoCadastroEmail = "teste@teste.com.br";
+			informacao.A3InformacaoCadastroNomeCompleto = "TESTE Fulano da Silva";
+			informacao.A3InformacaoCadastroNomeMae = "MAE Teste fulano da Silva";
+			informacao.A3InformacaoCadastroNomePai = "PAI Teste fulano da silva";
+			informacao.A3InformacaoCadastroNumeroCarteiraNacionalSaude = "1234567890";
+			usuario.A3InformacaoCadastro = new List<A3InformacaoCadastro>();
+			usuario.A3InformacaoCadastro.Add(informacao);
+
+			RelUsuarioPerfil perfilUsuario = new RelUsuarioPerfil();
+			perfilUsuario.A6PerfilId = 4;
+			usuario.RelUsuarioPerfil = new List<RelUsuarioPerfil>();
+			usuario.RelUsuarioPerfil.Add(perfilUsuario);
 
 			var retorno = new A1UsuarioBusiness(_usuarioRepositorio, _usuarioInternoRepositorio, _perfilRepositorio, _profissionalRepositorio).CriarLogin(usuario);
 
 			Assert.True(retorno && usuario.Mensagens.Count == 0);
+		}
+
+		[Fact]
+		public void BuscarUsuarioPorCPFTest() 
+		{
+			string numeroCPF = "33333333344";
+
+			var usuario = new A1UsuarioBusiness(_usuarioRepositorio, null, null, null).BuscarUsuarioPorCPF(numeroCPF);
+
+			Assert.True(usuario.Mensagens.Count == 0);
 		}
 	}
 }

@@ -120,6 +120,9 @@
   <data name="MsgPerfilExistente" xml:space="preserve">
     <value>O perfil informado já existe no sistema.</value>
   </data>
+  <data name="MsgProfissionalExistente" xml:space="preserve">
+    <value>O codigo CNS do Profissional já está cadastrado no sistema</value>
+  </data>
   <data name="MsgSenhaIncorreta" xml:space="preserve">
     <value>O senha esta incorreta.</value>
   </data>

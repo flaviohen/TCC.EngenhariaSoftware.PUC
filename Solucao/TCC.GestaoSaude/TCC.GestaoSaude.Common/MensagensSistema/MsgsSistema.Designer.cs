@@ -70,6 +70,15 @@ namespace TCC.GestaoSaude.Common.MensagensSistema {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O codigo CNS do Profissional já está cadastrado no sistema.
+        /// </summary>
+        public static string MsgProfissionalExistente {
+            get {
+                return ResourceManager.GetString("MsgProfissionalExistente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O senha esta incorreta..
         /// </summary>
         public static string MsgSenhaIncorreta {
