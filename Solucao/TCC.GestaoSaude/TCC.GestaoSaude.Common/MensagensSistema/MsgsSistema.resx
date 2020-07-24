@@ -117,11 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MsgAtendimentoNaoEncontrado" xml:space="preserve">
+    <value>Numero de Atendimento não encontrado</value>
+  </data>
+  <data name="MsgEstabelecimentoExistente" xml:space="preserve">
+    <value>Já existe estabelecimento cadastrado com este codigo de estabelecimento</value>
+  </data>
+  <data name="MsgNaoExisteEstabelecimento" xml:space="preserve">
+    <value>Não existe estabelecimento para o codigo informado.</value>
+  </data>
   <data name="MsgPerfilExistente" xml:space="preserve">
     <value>O perfil informado já existe no sistema.</value>
   </data>
   <data name="MsgProfissionalExistente" xml:space="preserve">
     <value>O codigo CNS do Profissional já está cadastrado no sistema</value>
+  </data>
+  <data name="MsgProntuarioAtualizado" xml:space="preserve">
+    <value>Prontuario atualizado com sucesso!</value>
+  </data>
+  <data name="MsgProntuarioNaoEncontrado" xml:space="preserve">
+    <value>Prontuario não encontrado</value>
+  </data>
+  <data name="MsgRegistroEvolucaEnfermagemNaoEncontrado" xml:space="preserve">
+    <value>Registro não encontrado para o ID:{0}</value>
   </data>
   <data name="MsgSenhaIncorreta" xml:space="preserve">
     <value>O senha esta incorreta.</value>

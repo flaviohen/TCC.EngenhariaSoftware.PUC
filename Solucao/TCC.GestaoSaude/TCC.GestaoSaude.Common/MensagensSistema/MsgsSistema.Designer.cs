@@ -61,6 +61,33 @@ namespace TCC.GestaoSaude.Common.MensagensSistema {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Numero de Atendimento não encontrado.
+        /// </summary>
+        public static string MsgAtendimentoNaoEncontrado {
+            get {
+                return ResourceManager.GetString("MsgAtendimentoNaoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Já existe estabelecimento cadastrado com este codigo de estabelecimento.
+        /// </summary>
+        public static string MsgEstabelecimentoExistente {
+            get {
+                return ResourceManager.GetString("MsgEstabelecimentoExistente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não existe estabelecimento para o codigo informado..
+        /// </summary>
+        public static string MsgNaoExisteEstabelecimento {
+            get {
+                return ResourceManager.GetString("MsgNaoExisteEstabelecimento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O perfil informado já existe no sistema..
         /// </summary>
         public static string MsgPerfilExistente {
@@ -75,6 +102,33 @@ namespace TCC.GestaoSaude.Common.MensagensSistema {
         public static string MsgProfissionalExistente {
             get {
                 return ResourceManager.GetString("MsgProfissionalExistente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Prontuario atualizado com sucesso!.
+        /// </summary>
+        public static string MsgProntuarioAtualizado {
+            get {
+                return ResourceManager.GetString("MsgProntuarioAtualizado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Prontuario não encontrado.
+        /// </summary>
+        public static string MsgProntuarioNaoEncontrado {
+            get {
+                return ResourceManager.GetString("MsgProntuarioNaoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Registro não encontrado para o ID:{0}.
+        /// </summary>
+        public static string MsgRegistroEvolucaEnfermagemNaoEncontrado {
+            get {
+                return ResourceManager.GetString("MsgRegistroEvolucaEnfermagemNaoEncontrado", resourceCulture);
             }
         }
         

@@ -60,19 +60,19 @@ namespace TCC.GestaoSaude.Test
 		{
 
 			A2UsuarioInterno usuario = new A2UsuarioInterno();
-			usuario.A2UsuarioInternoNome = "Usuario Profissional Saude";
-			usuario.A2UsuarioInternoEmail = "profissionalSaude@teste.com.br";
+			usuario.A2UsuarioInternoNome = "Administrador";
+			usuario.A2UsuarioInternoEmail = "administrador@teste.com.br";
 			usuario.A2UsuarioInternoSenha = "123456";
 
 			RelUsuarioInternoPerfil perfil = new RelUsuarioInternoPerfil();
-			perfil.A6PerfilId = 3;
+			perfil.A6PerfilId = 1;
 			usuario.RelUsuarioInternoPerfil = new List<RelUsuarioInternoPerfil>();
 			usuario.RelUsuarioInternoPerfil.Add(perfil);
 
-			RelUsuarioInternoProfissional profissional = new RelUsuarioInternoProfissional();
-			profissional.A13ProfissionalCodigoCns = "700204985949127";
-			usuario.RelUsuarioInternoProfissional = new List<RelUsuarioInternoProfissional>();
-			usuario.RelUsuarioInternoProfissional.Add(profissional);
+			//RelUsuarioInternoProfissional profissional = new RelUsuarioInternoProfissional();
+			//profissional.A13ProfissionalCodigoCns = "700204985949127";
+			//usuario.RelUsuarioInternoProfissional = new List<RelUsuarioInternoProfissional>();
+			//usuario.RelUsuarioInternoProfissional.Add(profissional);
 
 			var retorno = new A2UsuarioInternoBusiness(_usuarioInternoRepositorio).CriarLoginInterno(usuario);
 
