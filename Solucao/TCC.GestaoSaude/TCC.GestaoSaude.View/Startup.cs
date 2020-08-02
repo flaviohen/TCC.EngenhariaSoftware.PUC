@@ -4,10 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TCC.GestaoSaude.Business;
+using TCC.GestaoSaude.DataAccess.Contexto;
+using TCC.GestaoSaude.DataAccess.Interface;
+using TCC.GestaoSaude.DataAccess.Repositorio;
 
 namespace TCC.GestaoSaude.View
 {
@@ -23,7 +29,22 @@ namespace TCC.GestaoSaude.View
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddEntityFrameworkSqlServer()
+				.AddDbContext<GestaoSaudeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GestaoSaude"), b => b.MigrationsAssembly("TCC.GestaoSaude.View")));
 			services.AddControllersWithViews();
+			services.AddSession();
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+			services.AddTransient<IA1UsuarioRepositorio, A1UsuarioRepositorio>();
+			services.AddTransient<IA10RegistroEvolucaoEnfermagemRepositorio, A10RegistroEvolucaoEnfermagemRepositorio>();
+			services.AddTransient<IA13ProfissionalRepositorio, A13ProfissionalRepositorio>();
+			services.AddTransient<IA20TipoEstabelecimentoRepositorio, A20TipoEstabelecimentoRepositorio>();
+			services.AddTransient<IA21EstabelecimentoRepositorio, A21EstabelecimentoRepositorio>();
+			services.AddTransient<IA29AtendimentoRepositorio, A29AtendimentoRepositorio>();
+			services.AddTransient<IA2UsuarioInternoRepositorio, A2UsuarioInternoRepositorio>();
+			services.AddTransient<IA6PerfilRepositorio, A6PerfilRepositorio>();
+			services.AddTransient<IA9ProntuarioRepositorio, A9ProntuarioRepositorio>();
+			services.AddTransient<IEmailEnvio, EnvioEmail>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +66,7 @@ namespace TCC.GestaoSaude.View
 			app.UseRouting();
 
 			app.UseAuthorization();
+			app.UseSession();
 
 			app.UseEndpoints(endpoints =>
 			{

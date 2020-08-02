@@ -78,5 +78,15 @@ namespace TCC.GestaoSaude.Test
 
 			Assert.True(retorno && usuario.Mensagens.Count == 0);
 		}
+
+		[Fact]
+		public void BuscarUsuarioInternoPorEmailTest() 
+		{
+			string email = _usuarioInternoRepositorio.GetAll().FirstOrDefault().A2UsuarioInternoEmail;
+
+			var usuarioInterno = new A2UsuarioInternoBusiness(_usuarioInternoRepositorio).BuscarUsuarioInternoPorEmail(email);
+
+			Assert.True(usuarioInterno != null);
+		}
 	}
 }

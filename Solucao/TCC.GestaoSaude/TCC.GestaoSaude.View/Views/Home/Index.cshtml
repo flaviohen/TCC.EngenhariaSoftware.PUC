@@ -3,89 +3,68 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div id="loginbox">
-        <div class="control-group normal_text"> <h3><img src="~/img/Logo.png" width="200" height="200" /></h3></div>
-        <div class="control-group normal_text"><h3>Gestão de Saúde</h3></div>
-        <ul class="nav nav-tabs" id="MinhasTabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="paciente-tab" data-toggle="tab" href="#paciente" role="tab" aria-controls="paciente" aria-selected="true">Paciente</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profissional-tab" data-toggle="tab" href="#profissional" role="tab" aria-controls="profissional" aria-selected="true">Profissional</a>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="paciente" role="tabpanel" aria-labelledby="paciente-tab">
-                <form id="loginform" class="form-vertical" asp-action="Index" asp-controller="Home" method="post">
-                    <div class="control-group">
-                        <div class="controls">
-                            <div class="main_input_box">
-                                <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" placeholder="Username" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="controls">
-                            <div class="main_input_box">
-                                <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" placeholder="Password" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <span class="pull-left"></span>
-                        <span class="pull-right"><button type="submit" class="btn btn-success"> Entrar</button></span>
-                    </div>
-                </form>
-                <form id="recoverform" action="#" class="form-vertical">
-                    <p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
-
+<div id="loginbox">
+    <div class="control-group normal_text"> <h3><img src="~/img/Logo.png" width="200" height="200" /></h3></div>
+    <div class="control-group normal_text"><h3>Gestão de Saúde</h3></div>
+    <ul class="nav nav-tabs" id="MinhasTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="paciente-tab" data-toggle="tab" href="#paciente" role="tab" aria-controls="paciente" aria-selected="true">Paciente</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profissional-tab" data-toggle="tab" href="#profissional" role="tab" aria-controls="profissional" aria-selected="true">Profissional</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="paciente" role="tabpanel" aria-labelledby="paciente-tab">
+            <form id="loginform" class="form-vertical" asp-action="Index" asp-controller="Home" method="post">
+                <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
-                            <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" placeholder="E-mail address" />
+                            <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" id="txtCPF" name="txtCPF" maxlength="11" placeholder="CPF somente números" />
                         </div>
                     </div>
-
-                    <div class="form-actions">
-                        <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
-                        <span class="pull-right"><a class="btn btn-info" />Reecover</a></span>
-                    </div>
-                </form>
-            </div>
-            <div class="tab-pane fade" id="profissional" role="tabpanel" aria-labelledby="profissional-tab">
-                <form id="loginform" class="form-vertical" action="index.html">
-                    <div class="control-group">
-                        <div class="controls">
-                            <div class="main_input_box">
-                                <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" placeholder="Username" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="controls">
-                            <div class="main_input_box">
-                                <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" placeholder="Password" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
-                        <span class="pull-right"><a type="submit" href="index.html" class="btn btn-success" /> Login</a></span>
-                    </div>
-                </form>
-                <form id="recoverform" action="#" class="form-vertical">
-                    <p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
-
+                </div>
+                <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
-                            <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" placeholder="E-mail address" />
+                            <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" />
                         </div>
                     </div>
+                </div>
+                <div class="form-actions">
+                    <span class="pull-left"></span>
+                    <span class="pull-right"><button type="submit" class="btn btn-success"> Entrar</button></span>
+                </div>
+            </form>
 
-                    <div class="form-actions">
-                        <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
-                        <span class="pull-right"><a class="btn btn-info" />Reecover</a></span>
+        </div>
+        <div class="tab-pane fade" id="profissional" role="tabpanel" aria-labelledby="profissional-tab">
+            <form id="loginform" class="form-vertical" asp-action="LoginInterno" asp-controller="Home">
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" id="txtEmail" name="txtEmail" placeholder="E-mail" />
+                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" id="txtSenhaInterno" name="txtSenhaInterno" placeholder="Password" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <span class="pull-right"><button type="submit" class="btn btn-success"> Entrar</button></span>
+                </div>
+            </form>
         </div>
     </div>
+    @if (ViewBag.Mensagem != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            @ViewBag.Mensagem
+        </div>
+    }
+
+</div>

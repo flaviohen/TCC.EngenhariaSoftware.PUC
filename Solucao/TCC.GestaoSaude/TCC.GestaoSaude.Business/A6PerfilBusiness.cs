@@ -47,5 +47,25 @@ namespace TCC.GestaoSaude.Business
 				return false;
 			}
 		}
+
+		public List<A6Perfil> RetornarPerfisUsuarioExterno(A1Usuario usuarioExterno)
+		{
+			List<A6Perfil> perfis = new List<A6Perfil>();
+			foreach (var item in usuarioExterno.RelUsuarioPerfil)
+			{
+				perfis.Add(item.A6Perfil);
+			}
+			return perfis;
+		}
+
+		public List<A6Perfil> RetornarPerfisUsuarioInterno(A2UsuarioInterno usuarioInterno)
+		{
+			List<A6Perfil> perfis = new List<A6Perfil>();
+			foreach (var item in usuarioInterno.RelUsuarioInternoPerfil)
+			{
+				perfis.Add(item.A6Perfil);
+			}
+			return perfis;
+		}
 	}
 }

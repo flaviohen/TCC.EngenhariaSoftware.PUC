@@ -1,0 +1,24 @@
+﻿@model TCC.GestaoSaude.View.Models.MenuViewModel
+
+@foreach (ItemMenu item in Model.items)
+{
+    <li id="ItemMenu_@item.Id" onclick="MenuAtivo(this)">
+        <a asp-action="@item.Acao" asp-controller="@item.Controller">
+            <i class="@item.Icone"></i> <span>@item.TextoMenu</span>
+        </a>
+    </li>
+}
+
+<script>
+    var elementoMenuAtivo = localStorage.getItem("MenuAtivo");
+
+    if (elementoMenuAtivo != null) {
+        $("#" + elementoMenuAtivo).addClass("active");
+    }
+
+    function MenuAtivo(elemento)
+    {
+        localStorage.setItem("MenuAtivo", $(elemento).attr("id"));
+    }
+</script>
+
