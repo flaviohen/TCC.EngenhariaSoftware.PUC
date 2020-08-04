@@ -43,7 +43,7 @@
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
-                            <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" id="txtEmail" name="txtEmail" placeholder="E-mail" />
+                            <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="email" id="txtEmail" name="txtEmail" placeholder="E-mail" />
                         </div>
                     </div>
                 </div>
@@ -62,8 +62,12 @@
     </div>
     @if (ViewBag.Mensagem != null)
     {
-        <div class="alert alert-warning" role="alert">
-            @ViewBag.Mensagem
+        <div class="control-group" style="margin-top:10px;">
+            <div class="controls">
+                <div class="alert alert-warning" role="alert">
+                    @ViewBag.Mensagem
+                </div>
+            </div>
         </div>
     }
 

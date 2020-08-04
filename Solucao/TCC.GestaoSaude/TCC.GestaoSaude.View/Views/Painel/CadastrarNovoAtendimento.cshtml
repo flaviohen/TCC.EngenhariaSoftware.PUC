@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewData["Title"] = "Painel";
+    Layout = "~/Views/Shared/_LayoutPainel.cshtml";
+}
+<script src="~/js/Atendimento.js"></script>
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb">
+        <a asp-controller="Painel" asp-action="PaginaInicial" title="Ir para Home" class="tip-bottom"><i class="icon-home"></i> Home ></a>
+        <a asp-controller="Painel" asp-action="CadastrarNovoAtendimento" title="Novo atendimento" class="tip-bottom"><i class="icon-th-list"></i> Novo atendimento</a>
+    </div>
+</div>
+<!--End-breadcrumbs-->
+<!--Action boxes-->
+<div class="container-fluid">
+    <div class="quick-actions_homepage">
+        <ul class="quick-actions">
+            <li class="bg_lo span3"><a href="#"><i class="icon-th-list"></i> Novo atendimento</a></li>
+        </ul>
+    </div>
+    <!--End-Action boxes-->
+    <hr>
+    <div class="row-fluid">
+        <div class="span10">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Formulario de pesquisa</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <div class="controls controls-row" style="margin-top:10px; margin-left:3px;">
+                        <input type="text" class="form-control span5 m-wrap" id="txtCPF" placeholder="numero do CPF" />
+                        <button type="button" class="btn btn-success span1" id="btnPesquisar"><i class="icon icon-search"></i></button>
+                        <button type="button" class="btn btn-primary span3" id="btnNovoAtendimento"><i class="icon icon-th-list"></i>  Novo atendimento</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="alert alert-warning span8" role="alert" id="alerta">
+    </div>
+
+    <div class="alert alert-success span8" role="alert" id="sucesso">
+    </div>
+
+    <div class="alert alert-danger span8" role="alert" id="erro">
+    </div>
+
+    <div class="row-fluid" id="FormularioAtendimento">
+        <div class="span10">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Formulario de atendimento</h5>
+                </div>
+                <div class="widget-content">
+                    <div class="controls">
+                        <div class="span12">
+                            <label for="txtFormCPF">CPF:</label>
+                            <input type="text" id="txtFormCPF" class="span6 m-wrap" placeholder="Número CPF" />
+                            <input type="hidden" id="hdnIDUsuario" value="0" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span7">
+                            <label for="txtNomeCompleto">Nome Completo:</label>
+                            <input type="text" id="txtNomeCompleto" class="span12 m-wrap" placeholder="Nome completo" />
+                        </div>
+                        <div class="span5">
+                            <label for="txtDataNascimento">Data de Nascimento:</label>
+                            <input type="text" id="txtDataNascimento" class="span12 m-wrap" placeholder="Data Nascimento" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <label for="txtNomeMae">Nome da Mãe:</label>
+                            <input type="text" id="txtNomeMae" class="span12 m-wrap" placeholder="Nome Mãe" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <label for="txtNomePai">Nome da Pai:</label>
+                            <input type="text" id="txtNomePai" class="span12 m-wrap" placeholder="Nome Pai" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span8">
+                            <label for="txtNumeroCarteiraSUS">Numero carteira SUS:</label>
+                            <input type="text" id="txtNumeroCarteiraSUS" class="span12 m-wrap" placeholder="Numero carteira SUS" />
+                        </div>
+                        <div class="span4">
+                            <label for="txtTelefoneResidencial">Telefone Residencial:</label>
+                            <input type="text" id="txtTelefoneResidencial" class="span12 m-wrap" placeholder="Telefone Residencial" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span4">
+                            <label for="txtTelefoneCelular">Telefone Celular:</label>
+                            <input type="text" id="txtTelefoneCelular" class="form-control span12" placeholder="Telefone Celular" />
+                        </div>
+                        <div class="span8">
+                            <label for="txtEmail">Email:</label>
+                            <input type="text" id="txtEmail" class="form-control span12" placeholder="E-mail" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span1" style="float:right;margin-right:35px;">
+                            <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">Cadastrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Confirmação de atendimento</h3>
+        </div>
+        <div class="modal-body">
+            <p>Confirma o cadastro do atendimento ao paciente?</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button type="button" id="btnCadastrar" class="btn btn-primary">OK</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    var urlPesquisarPorCPF = '@Url.Action("PesquisarPorCPF","Painel")';
+    var urlCadastrarAtendimento = '@Url.Action("CadastrarNovoAtendimento","Painel")';
+    $(document).ready(function () {
+        $("#FormularioAtendimento").hide();
+        $("#alerta").hide();
+        $("#sucesso").hide();
+        $("#erro").hide();
+
+        $("#btnNovoAtendimento").click(function () {
+            NovoAtendimento();
+        });
+
+        $("#btnPesquisar").click(function () {
+            PesquisarPorCPF($("#txtCPF").val(), urlPesquisarPorCPF);
+        });
+
+        $("#btnCadastrar").click(function () {
+            CadastrarNovoAtendimento(urlCadastrarAtendimento);
+            $("#closeModal").click();
+        });
+    });
+
+</script>

@@ -59,7 +59,7 @@ namespace TCC.GestaoSaude.View.Controllers
 			{
 				Sessao.UsuarioExterno = null;
 				Sessao.UsuarioInterno = null;
-				ViewBag.Mensagem = "Não existe cadastro para os dados informados";
+				ViewBag.Mensagem = usuario.Mensagens[0].DescricaoMensagem;
 				return View();
 			}
 		}
@@ -83,8 +83,8 @@ namespace TCC.GestaoSaude.View.Controllers
 			{
 				Sessao.UsuarioInterno = null;
 				Sessao.UsuarioExterno = null;
-				ViewBag.Mensagem = "Não existe cadastro para os dados informados";
-				return View();
+				ViewBag.Mensagem = usuario.Mensagens[0].DescricaoMensagem;
+				return View("Index","Home");
 			}
 		}
 

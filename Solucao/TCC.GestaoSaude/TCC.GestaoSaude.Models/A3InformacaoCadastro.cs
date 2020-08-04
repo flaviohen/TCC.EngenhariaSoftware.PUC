@@ -7,54 +7,66 @@ using TCC.GestaoSaude.Common;
 
 namespace TCC.GestaoSaude.Models
 {
-    [Table("A3_InformacaoCadastro")]
-    public partial class A3InformacaoCadastro
-    {
-        public A3InformacaoCadastro()
-        {
-            A29Atendimento = new HashSet<A29Atendimento>();
-            A4CartaoVacinacao = new HashSet<A4CartaoVacinacao>();
-            Mensagens = new List<Mensagem>();
-        }
+	[Table("A3_InformacaoCadastro")]
+	public partial class A3InformacaoCadastro
+	{
+		public A3InformacaoCadastro()
+		{
+			A29Atendimento = new HashSet<A29Atendimento>();
+			A4CartaoVacinacao = new HashSet<A4CartaoVacinacao>();
+			Mensagens = new List<Mensagem>();
+		}
 
-        [Key]
-        [Column("A3_InformacaoCadastro_ID")]
-        public int A3InformacaoCadastroId { get; set; }
-        [Column("A1_Usuario_ID")]
-        public int A1UsuarioId { get; set; }
-        [Column("A3_InformacaoCadastro_NomeCompleto")]
-        [StringLength(100)]
-        public string A3InformacaoCadastroNomeCompleto { get; set; }
-        [Column("A3_InformacaoCadastro_NomeMae")]
-        [StringLength(100)]
-        public string A3InformacaoCadastroNomeMae { get; set; }
-        [Column("A3_InformacaoCadastro_NomePai")]
-        [StringLength(100)]
-        public string A3InformacaoCadastroNomePai { get; set; }
-        [Column("A3_InformacaoCadastro_NumeroCarteiraNacionalSaude")]
-        [StringLength(100)]
-        public string A3InformacaoCadastroNumeroCarteiraNacionalSaude { get; set; }
-        [Column("A3_InformacaoCadastro_Email")]
-        [StringLength(100)]
-        public string A3InformacaoCadastroEmail { get; set; }
-        [Column("A3_InformacaoCadastro_Telefone")]
-        [StringLength(20)]
-        public string A3InformacaoCadastroTelefone { get; set; }
-        [Column("A3_InformacaoCadastro_Celular")]
-        [StringLength(20)]
-        public string A3InformacaoCadastroCelular { get; set; }
-        [Column("A3_InformacaoCadastro_DataNascimento", TypeName = "date")]
-        public DateTime? A3InformacaoCadastroDataNascimento { get; set; }
+		[Key]
+		[Column("A3_InformacaoCadastro_ID")]
+		public int A3InformacaoCadastroId { get; set; }
+		[Column("A1_Usuario_ID")]
+		public int A1UsuarioId { get; set; }
+		[Column("A3_InformacaoCadastro_NomeCompleto")]
+		[StringLength(100)]
+		public string A3InformacaoCadastroNomeCompleto { get; set; }
+		[Column("A3_InformacaoCadastro_NomeMae")]
+		[StringLength(100)]
+		public string A3InformacaoCadastroNomeMae { get; set; }
+		[Column("A3_InformacaoCadastro_NomePai")]
+		[StringLength(100)]
+		public string A3InformacaoCadastroNomePai { get; set; }
+		[Column("A3_InformacaoCadastro_NumeroCarteiraNacionalSaude")]
+		[StringLength(100)]
+		public string A3InformacaoCadastroNumeroCarteiraNacionalSaude { get; set; }
+		[Column("A3_InformacaoCadastro_Email")]
+		[StringLength(100)]
+		public string A3InformacaoCadastroEmail { get; set; }
+		[Column("A3_InformacaoCadastro_Telefone")]
+		[StringLength(20)]
+		public string A3InformacaoCadastroTelefone { get; set; }
+		[Column("A3_InformacaoCadastro_Celular")]
+		[StringLength(20)]
+		public string A3InformacaoCadastroCelular { get; set; }
+		[Column("A3_InformacaoCadastro_DataNascimento", TypeName = "date")]
+		public DateTime? A3InformacaoCadastroDataNascimento { get; set; }
 
-        [ForeignKey(nameof(A1UsuarioId))]
-        [InverseProperty("A3InformacaoCadastro")]
-        public virtual A1Usuario A1Usuario { get; set; }
-        [InverseProperty("A3InformacaoCadastro")]
-        public virtual ICollection<A29Atendimento> A29Atendimento { get; set; }
-        [InverseProperty("A3InformacaoCadastro")]
-        public virtual ICollection<A4CartaoVacinacao> A4CartaoVacinacao { get; set; }
+		[ForeignKey(nameof(A1UsuarioId))]
+		[InverseProperty("A3InformacaoCadastro")]
+		public virtual A1Usuario A1Usuario { get; set; }
+		[InverseProperty("A3InformacaoCadastro")]
+		public virtual ICollection<A29Atendimento> A29Atendimento { get; set; }
+		[InverseProperty("A3InformacaoCadastro")]
+		public virtual ICollection<A4CartaoVacinacao> A4CartaoVacinacao { get; set; }
 
-        [NotMapped]
-        public List<Mensagem> Mensagens { get; set; }
-    }
+		[NotMapped]
+		public List<Mensagem> Mensagens { get; set; }
+
+		[NotMapped]
+		public string DataNascimento
+		{
+			get
+			{
+				string dataNascimento = DateTime.MinValue.ToString("dd/MM/yyyy");
+				if (this.A3InformacaoCadastroDataNascimento != null)
+					dataNascimento = Convert.ToDateTime(this.A3InformacaoCadastroDataNascimento).ToString("dd/MM/yyyy");
+				return dataNascimento;
+			}
+		}
+	}
 }

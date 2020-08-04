@@ -165,7 +165,7 @@ namespace TCC.GestaoSaude.View.Models
 			List<ItemMenu> items = new List<ItemMenu>();
 			ItemMenu item = new ItemMenu();
 			item.Id = 13;
-			item.Acao = "CadastrarAtendimento";
+			item.Acao = "CadastrarNovoAtendimento";
 			item.Controller = "Painel";
 			item.Icone = "icon icon-book";
 			item.TextoMenu = "Novo atendimento";

@@ -82,14 +82,15 @@ namespace TCC.GestaoSaude.Business
 					if (usuarioInternoExistente == null) 
 					{
 						mensagem.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgUsuarioInternoNaoExiste;
+						usuarioInterno.Mensagens.Add(mensagem);
 						retorno = false;
 					}
-					if (usuarioInterno != null) 
+					if (usuarioInternoExistente != null) 
 					{
 						if (usuarioInterno.A2UsuarioInternoSenha != usuarioInternoExistente.A2UsuarioInternoSenha)
 						{
 							mensagem.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgSenhaIncorreta;
-							usuarioPaciente.Mensagens.Add(mensagem);
+							usuarioInterno.Mensagens.Add(mensagem);
 							retorno = false;
 						}
 						else 

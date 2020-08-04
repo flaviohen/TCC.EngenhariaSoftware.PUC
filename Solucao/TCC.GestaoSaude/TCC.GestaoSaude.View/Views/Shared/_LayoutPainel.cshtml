@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var informacaoUsuario = TCC.GestaoSaude.View.SessionCustom.Sessao.RetornarInformacaoUsuario(ViewBag.Session);
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -6,6 +10,7 @@
     <title>Gestão de Saúde</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="~/js/Matrix/jquery.min.js"></script>
     <link rel="stylesheet" href="~/css/Matrix/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Matrix/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="~/css/Matrix/fullcalendar.css" />
@@ -30,9 +35,9 @@
             <li class="dropdown" id="profile-messages">
                 <a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">Bem Vindo</span><b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="icon-user"></i> @ViewBag.NomeUsuario</a></li>
+                    <li><a href="#"><i class="icon-user"></i> @informacaoUsuario.NomeUsuario</a></li>
                     <li class="divider"></li>
-                    <li><a href="#"><i class="icon-check"></i> Perfis: @ViewBag.Perfil</a></li>
+                    <li><a href="#"><i class="icon-check"></i> Perfis: @informacaoUsuario.Perfis</a></li>
                     <li class="divider"></li>
                     <li><a asp-action="Logout" asp-controller="Painel"><i class="icon-key"></i> Sair</a></li>
                 </ul>
@@ -44,7 +49,7 @@
     <!--start-top-serch-->
     <div id="search">
         @*<input type="text" placeholder="Search here..." />
-        <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>*@
+            <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>*@
     </div>
     <!--close-top-serch-->
     <!--sidebar-menu-->
@@ -66,8 +71,8 @@
     </div>
     <!--end-Footer-part-->
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    
     <script src="~/js/Matrix/excanvas.min.js"></script>
     <script src="~/js/Matrix/jquery.ui.custom.js"></script>
     <script src="~/js/Matrix/bootstrap.min.js"></script>

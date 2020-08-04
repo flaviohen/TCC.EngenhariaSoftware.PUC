@@ -8,21 +8,15 @@ namespace TCC.GestaoSaude.View.Models
 {
 	public class UsuarioExternoViewModel
 	{
-
-        public int A1UsuarioId { get; set; }
-
-        public string A1UsuarioNumeroCpf { get; set; }
- 
-        public string A1UsuarioNome { get; set; }
-
-        public string A1UsuarioSenha { get; set; }
-        public List<A3InformacaoCadastro> A3InformacaoCadastro { get; set; }
- 
-        public List<RelUsuarioPerfil> RelUsuarioPerfil { get; set; }
-    }
-
-    public partial class RelUsuarioPerfil 
-    {
-        public A6Perfil A6Perfil { get; set; }
-    }
+        public string UsuarioID { get; set; }
+        public string NumeroCPF { get; set; }
+        public string NomeCompleto { get; set; }
+        public string DataNascimento { get; set; }
+		public string NomeMae { get; set; }
+		public string NomePai { get; set; }
+		public string NumeroCarteiraSUS { get; set; }
+		public string TelefoneResidencial { get; set; }
+		public string TelefoneCelular { get; set; }
+		public string Email { get; set; }
+	}
 }

@@ -61,7 +61,7 @@ namespace TCC.GestaoSaude.Business
 
                 MailMessage mail = new MailMessage()
                 {
-                    From = new MailAddress(emailConfig.FromEmail, "Criação de Senha")
+                    From = new MailAddress(emailConfig.FromEmail, "Gestao de Saúde")
                 };
 
                 mail.To.Add(new MailAddress(toEmail));

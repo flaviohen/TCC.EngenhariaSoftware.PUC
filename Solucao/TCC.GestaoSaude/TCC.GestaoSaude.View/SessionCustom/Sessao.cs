@@ -54,5 +54,39 @@ namespace TCC.GestaoSaude.View.SessionCustom
 			Sessao sessi = new Sessao(httpContextAccessor);
 			return sessi.UsuarioExterno != null || sessi.UsuarioInterno != null;
 		}
+
+		public static InformacaoUsuario RetornarInformacaoUsuario(Sessao sessao) 
+		{
+			InformacaoUsuario informacao = new InformacaoUsuario();
+			if (sessao.UsuarioExterno != null)
+			{
+				informacao.NomeUsuario = sessao.UsuarioExterno.A1UsuarioNome;
+				string perfis = "";
+				foreach (var item in sessao.UsuarioExterno.RelUsuarioPerfil)
+				{
+					perfis += item.A6Perfil.A6PerfilDescricao + " / ";
+				}
+				informacao.Perfis = perfis;
+			}
+
+			if (sessao.UsuarioInterno != null)
+			{
+				informacao.NomeUsuario = sessao.UsuarioInterno.A2UsuarioInternoNome;
+				string perfis = "";
+				foreach (var item in sessao.UsuarioInterno.RelUsuarioInternoPerfil)
+				{
+					perfis += item.A6Perfil.A6PerfilDescricao + " / ";
+				}
+				informacao.Perfis = perfis;
+			}
+
+			return informacao;
+		}
+	}
+
+	public class InformacaoUsuario 
+	{
+		public string NomeUsuario { get; set; }
+		public string Perfis { get; set; }
 	}
 }
