@@ -24,6 +24,9 @@ namespace TCC.GestaoSaude.Test
 		private readonly IA29AtendimentoRepositorio _atendimentoRepositorio;
 		private readonly IA10RegistroEvolucaoEnfermagemRepositorio _registroEvolucaoEnfermagemRepositorio;
 		private readonly IRelHistoricoEvolucaoEnfermagemRepositorio _relHistoricoEvolucaoEnfermagemRepositorio;
+		private readonly IA1UsuarioRepositorio _usuarioRepositorio;
+		private readonly IA13ProfissionalRepositorio _profissionalRepositorio;
+		private readonly IA2UsuarioInternoRepositorio _usuarioInternoRepositorio;
 		public A9ProntuarioTest() 
 		{
 			var services = new ServiceCollection();
@@ -32,6 +35,9 @@ namespace TCC.GestaoSaude.Test
 			services.AddTransient<IA29AtendimentoRepositorio, A29AtendimentoRepositorio>();
 			services.AddTransient<IA10RegistroEvolucaoEnfermagemRepositorio, A10RegistroEvolucaoEnfermagemRepositorio>();
 			services.AddTransient<IRelHistoricoEvolucaoEnfermagemRepositorio, RelHistoricoEvolucaoEnfermagemRepositorio>();
+			services.AddTransient<IA1UsuarioRepositorio, A1UsuarioRepositorio>();
+			services.AddTransient<IA13ProfissionalRepositorio, A13ProfissionalRepositorio>();
+			services.AddTransient<IA2UsuarioInternoRepositorio, A2UsuarioInternoRepositorio>();
 
 			services.AddEntityFrameworkSqlServer()
 				.AddDbContext<GestaoSaudeContext>(options => options.UseSqlServer(A1UsuarioTest.connectionString, b => b.MigrationsAssembly("TCC.GestaoSaude.DataAccess")));
@@ -41,12 +47,15 @@ namespace TCC.GestaoSaude.Test
 			_atendimentoRepositorio = serviceProvider.GetService<IA29AtendimentoRepositorio>();
 			_registroEvolucaoEnfermagemRepositorio = serviceProvider.GetService<IA10RegistroEvolucaoEnfermagemRepositorio>();
 			_relHistoricoEvolucaoEnfermagemRepositorio = serviceProvider.GetService<IRelHistoricoEvolucaoEnfermagemRepositorio>();
+			_usuarioRepositorio = serviceProvider.GetService<IA1UsuarioRepositorio>();
+			_profissionalRepositorio = serviceProvider.GetService<IA13ProfissionalRepositorio>();
+			_usuarioInternoRepositorio = serviceProvider.GetService<IA2UsuarioInternoRepositorio>();
 		}
 
 		[Fact]
 		public void CadastrarProntuarioTest()
 		{
-			var atendimento = new A29AtendimentoBusiness(_atendimentoRepositorio,_prontuarioRepositorio,_registroEvolucaoEnfermagemRepositorio).BuscarAtendimento(1);
+			var atendimento = new A29AtendimentoBusiness(_atendimentoRepositorio,_prontuarioRepositorio,_registroEvolucaoEnfermagemRepositorio,_usuarioRepositorio, _profissionalRepositorio,_usuarioInternoRepositorio).BuscarAtendimento(1);
 
 			A9Prontuario prontuario = new A9Prontuario();
 			prontuario.A9ProntuarioInternado = false;
@@ -72,14 +81,14 @@ namespace TCC.GestaoSaude.Test
 			lstRegistros.Add(registroEnfermagem);
 			lstRegistros.Add(registroEnfermagem2);
 
-			List<int> registrosCadastrados = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio).CadastrarRegistrosEnfermagem(lstRegistros);
+			List<int> registrosCadastrados = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio,_profissionalRepositorio,_usuarioInternoRepositorio).CadastrarRegistrosEnfermagem(lstRegistros);
 
 			foreach (var item in registrosCadastrados)
 			{
 				prontuario.RelHistoricoEvolucaoEnfermagem.Add(new RelHistoricoEvolucaoEnfermagem() { A10RegistroEvolucaoEnfermagemId = item });
 			}
 
-			var resultado = new A9ProntuarioBusiness(_prontuarioRepositorio,null,null).CadastrarProntuario(prontuario);
+			var resultado = new A9ProntuarioBusiness(_prontuarioRepositorio,null,null,_profissionalRepositorio,_usuarioInternoRepositorio).CadastrarProntuario(prontuario);
 
 			Assert.True(resultado);
 		}
@@ -89,7 +98,7 @@ namespace TCC.GestaoSaude.Test
 		public void BuscarProntuarioPorCodigoTest() 
 		{
 			int idProntuario = _prontuarioRepositorio.GetAll().FirstOrDefault().A9ProntuarioId;
-			var prontuario = new A9ProntuarioBusiness(_prontuarioRepositorio,_registroEvolucaoEnfermagemRepositorio,null).BuscarProntuarioPorCodigo(idProntuario);
+			var prontuario = new A9ProntuarioBusiness(_prontuarioRepositorio,_registroEvolucaoEnfermagemRepositorio,null,_profissionalRepositorio,_usuarioInternoRepositorio).BuscarProntuarioPorCodigo(idProntuario);
 
 			Assert.True(prontuario != null);
 		}
@@ -98,7 +107,7 @@ namespace TCC.GestaoSaude.Test
 		public void AtualizarProntuarioTest()
 		{
 			int idProntuario = _prontuarioRepositorio.GetAll().FirstOrDefault().A9ProntuarioId;
-			var prontuario = new A9ProntuarioBusiness(_prontuarioRepositorio, _registroEvolucaoEnfermagemRepositorio, null).BuscarProntuarioPorCodigo(idProntuario);
+			var prontuario = new A9ProntuarioBusiness(_prontuarioRepositorio, _registroEvolucaoEnfermagemRepositorio, null,_profissionalRepositorio,_usuarioInternoRepositorio).BuscarProntuarioPorCodigo(idProntuario);
 
 			prontuario.A9ProntuarioCondutaTerapeuta = "A terapia necessaria para a recuperação do paciente é acupuntura. O paciente precisa fazer fisioterapia";
 			prontuario.A9ProntuarioDescricaoCirurgica = "Cirurgia do tendão.";
@@ -112,7 +121,7 @@ namespace TCC.GestaoSaude.Test
 			List<A10RegistroEvolucaoEnfermagem> lstNovoRegistros = new List<A10RegistroEvolucaoEnfermagem>();
 			lstNovoRegistros.Add(novoRegistro);
 
-			var resultado = new A9ProntuarioBusiness(_prontuarioRepositorio, _registroEvolucaoEnfermagemRepositorio, _relHistoricoEvolucaoEnfermagemRepositorio).AtualizarProntuario(prontuario, lstNovoRegistros);
+			var resultado = new A9ProntuarioBusiness(_prontuarioRepositorio, _registroEvolucaoEnfermagemRepositorio, _relHistoricoEvolucaoEnfermagemRepositorio,_profissionalRepositorio,_usuarioInternoRepositorio).AtualizarProntuario(prontuario, lstNovoRegistros);
 
 			Assert.True(resultado && prontuario.Mensagens.ToList().Where(c => c.TipoMensagem == Common.TipoMensagem.Sucesso).Count() > 0);
 		}

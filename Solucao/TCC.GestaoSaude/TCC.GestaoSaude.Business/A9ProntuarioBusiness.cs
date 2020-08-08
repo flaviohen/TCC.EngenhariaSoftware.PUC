@@ -11,14 +11,22 @@ namespace TCC.GestaoSaude.Business
 	public class A9ProntuarioBusiness
 	{
 		private readonly IA9ProntuarioRepositorio _prontuarioRepositorio;
+		private readonly IA13ProfissionalRepositorio _profissionalRepositorio;
 		private readonly IA10RegistroEvolucaoEnfermagemRepositorio _registroEvolucaoEnfermagemRepositorio;
 		private readonly IRelHistoricoEvolucaoEnfermagemRepositorio _relHistoricoEvolucaoEnfermagemRepositorio;
+		private readonly IA2UsuarioInternoRepositorio _usuarioInternoRepositorio;
 
-		public A9ProntuarioBusiness(IA9ProntuarioRepositorio prontuarioRepositorio, IA10RegistroEvolucaoEnfermagemRepositorio registroEvolucaoEnfermagemRepositorio, IRelHistoricoEvolucaoEnfermagemRepositorio relHistoricoEvolucaoEnfermagemRepositorio) 
+		public A9ProntuarioBusiness(IA9ProntuarioRepositorio prontuarioRepositorio, 
+			IA10RegistroEvolucaoEnfermagemRepositorio registroEvolucaoEnfermagemRepositorio, 
+			IRelHistoricoEvolucaoEnfermagemRepositorio relHistoricoEvolucaoEnfermagemRepositorio,
+			IA13ProfissionalRepositorio profissionalRepositorio,
+			IA2UsuarioInternoRepositorio usuarioInternoRepositorio) 
 		{
 			_prontuarioRepositorio = prontuarioRepositorio;
 			_registroEvolucaoEnfermagemRepositorio = registroEvolucaoEnfermagemRepositorio;
 			_relHistoricoEvolucaoEnfermagemRepositorio = relHistoricoEvolucaoEnfermagemRepositorio;
+			_profissionalRepositorio = profissionalRepositorio;
+			_usuarioInternoRepositorio = usuarioInternoRepositorio;
 		}
 
 		public bool CadastrarProntuario(A9Prontuario prontuario) 
@@ -61,7 +69,7 @@ namespace TCC.GestaoSaude.Business
 					{
 						foreach (var item in prontuario.RelHistoricoEvolucaoEnfermagem)
 						{
-							item.A10RegistroEvolucaoEnfermagem = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio).BuscarRegistroEvolucaoEnfermagemPorCodigo(item.A10RegistroEvolucaoEnfermagemId);
+							item.A10RegistroEvolucaoEnfermagem = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio, _profissionalRepositorio,_usuarioInternoRepositorio).BuscarRegistroEvolucaoEnfermagemPorCodigo(item.A10RegistroEvolucaoEnfermagemId);
 						}
 					}
 				}
@@ -84,7 +92,7 @@ namespace TCC.GestaoSaude.Business
 				_prontuarioRepositorio.Update(prontuario, prontuario.A9ProntuarioId);
 				if (lstNovosRegistroEvolucaoEnfermagem.Count > 0) 
 				{
-					novosRegistroAdicionado = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio).CadastrarRegistrosEnfermagem(lstNovosRegistroEvolucaoEnfermagem);
+					novosRegistroAdicionado = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio, _profissionalRepositorio,_usuarioInternoRepositorio).CadastrarRegistrosEnfermagem(lstNovosRegistroEvolucaoEnfermagem);
 				}
 
 				foreach (var item in novosRegistroAdicionado)

@@ -22,6 +22,8 @@ namespace TCC.GestaoSaude.View.Controllers
 		private readonly IA13ProfissionalRepositorio _profissionalRepositorio;
 		private readonly IA2UsuarioInternoRepositorio _usuarioInternoRepositorio;
 		private readonly IA29AtendimentoRepositorio _atendimentoRepositorio;
+		private readonly IA9ProntuarioRepositorio _prontuarioRepositorio;
+		private readonly IA10RegistroEvolucaoEnfermagemRepositorio _registroEvolucaoEnfermagemRepositorio;
 		private readonly IEmailEnvio _emailEnvio;
 
 
@@ -32,6 +34,8 @@ namespace TCC.GestaoSaude.View.Controllers
 								IA13ProfissionalRepositorio profissionalRepositorio,
 								IA2UsuarioInternoRepositorio usuarioInternoRepositorio,
 								IA29AtendimentoRepositorio atendimentoRepositorio,
+								IA9ProntuarioRepositorio prontuarioRepositorio,
+								IA10RegistroEvolucaoEnfermagemRepositorio registroEvolucaoEnfermagemRepositorio,
 								IEmailEnvio emailEnvio)
 		{
 			_httpContextAccessor = httpContextAccessor;
@@ -40,6 +44,8 @@ namespace TCC.GestaoSaude.View.Controllers
 			_profissionalRepositorio = profissionalRepositorio;
 			_usuarioInternoRepositorio = usuarioInternoRepositorio;
 			_atendimentoRepositorio = atendimentoRepositorio;
+			_prontuarioRepositorio = prontuarioRepositorio;
+			_registroEvolucaoEnfermagemRepositorio = registroEvolucaoEnfermagemRepositorio;
 			_emailEnvio = emailEnvio;
 			_sessao = new Sessao(httpContextAccessor);
 
@@ -75,7 +81,7 @@ namespace TCC.GestaoSaude.View.Controllers
 				UsuarioExternoViewModel usuario = JsonConvert.DeserializeObject<UsuarioExternoViewModel>(formulario);
 				A29Atendimento atendimento = new A29Atendimento();
 				A1Usuario usuarioCadastro = new A1Usuario();
-				A29AtendimentoBusiness atendimentoNegocio = new A29AtendimentoBusiness(_atendimentoRepositorio, null, null);
+				A29AtendimentoBusiness atendimentoNegocio = new A29AtendimentoBusiness(_atendimentoRepositorio, null, null,_usuarioRepositorio,_profissionalRepositorio,_usuarioInternoRepositorio);
 				A1UsuarioBusiness usuarioNegocio = new A1UsuarioBusiness(_usuarioRepositorio, null, _perfilRepositorio, null);
 				EmailBusiness emailNegocio = new EmailBusiness(_emailEnvio);
 
@@ -170,6 +176,97 @@ namespace TCC.GestaoSaude.View.Controllers
 			catch (Exception ex)
 			{
 				return Json(new { Usuario = "", Mensagem = ex.Message });
+			}
+		}
+
+		public IActionResult PreencherProntuario() 
+		{
+			ViewBag.Session = _sessao;
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult PesquisarPorCodigoAtendimento(string numeroAtendimento) 
+		{
+			try
+			{
+				A29AtendimentoBusiness atendimentoNegocio = new A29AtendimentoBusiness(_atendimentoRepositorio, _prontuarioRepositorio, _registroEvolucaoEnfermagemRepositorio, _usuarioRepositorio,_profissionalRepositorio,_usuarioInternoRepositorio);
+				var atendimento = atendimentoNegocio.BuscarAtendimento(Convert.ToInt32(numeroAtendimento));
+				if (atendimento != null)
+				{
+					_sessao.RegistrosEvolucaoEnfermagem = null;
+					string atendimentoJson = JsonConvert.SerializeObject(atendimento, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+					var dados = JsonConvert.DeserializeObject<A29Atendimento>(atendimentoJson);
+					List<RegistroEnfermagemViewModel> lstRegistroEnfermagemJaCadastrado = new List<RegistroEnfermagemViewModel>(); ;
+					if (dados.RelAtendimentoProntuario.Count > 0) 
+					{
+						var prontuario = dados.RelAtendimentoProntuario.ToList()[0].A9Prontuario;
+						 
+						foreach (var item in prontuario.RelHistoricoEvolucaoEnfermagem)
+						{
+							RegistroEnfermagemViewModel registro = new RegistroEnfermagemViewModel();
+							registro.ID = item.A10RegistroEvolucaoEnfermagem.A10RegistroEvolucaoEnfermagemId;
+							registro.Data = Convert.ToDateTime(item.A10RegistroEvolucaoEnfermagem.A10RegistroEvolucaoEnfermagemData).ToString("dd/MM/yyyy");
+							registro.Hora = ((TimeSpan)item.A10RegistroEvolucaoEnfermagem.A10RegistroEvolucaoEnfermagemHora).ToString(@"hh\:mm\:ss");
+							registro.Descricao = item.A10RegistroEvolucaoEnfermagem.A10RegistroEvolucaoEnfermagemDescrição;
+							registro.Profissional = item.A10RegistroEvolucaoEnfermagem.A13ProfissionalCodigoCnsNavigation.RelUsuarioInternoProfissional.ToList()[0].A2UsuarioInterno.A2UsuarioInternoNome;
+							registro.EhRegistroNovo = item.A10RegistroEvolucaoEnfermagem.EhRegistroNovo;
+							lstRegistroEnfermagemJaCadastrado.Add(registro);
+						}
+						_sessao.RegistrosEvolucaoEnfermagem = lstRegistroEnfermagemJaCadastrado;
+					}
+
+					return Json(new { DadosAtendimento = dados, RegistrosEnfermagem = _sessao.RegistrosEvolucaoEnfermagem.OrderBy(c => c.ID), Mensagem = "", MensagemErro = "" });
+				}
+				else
+				{
+					return Json(new { DadosAtendimento = "", MensagemErro = "", Mensagem = atendimento.Mensagens[0].DescricaoMensagem });
+				}
+			}
+			catch (Exception ex)
+			{
+				return Json(new { DadosAtendimento = "", MensagemErro = ex.Message, Mensagem = "" });
+			}	
+		}
+
+		[HttpPost]
+		public IActionResult AdicionarRegistroEnfermagem(string descricao) 
+		{
+			try
+			{
+				RegistroEnfermagemViewModel registro = new RegistroEnfermagemViewModel();
+				registro.ID = _sessao.RegistrosEvolucaoEnfermagem.OrderBy(c => c.ID).LastOrDefault().ID + 1;
+				registro.Descricao = descricao;
+				registro.Data = DateTime.Now.ToString("dd/MM/yyyy");
+				registro.Hora = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).ToString(@"hh\:mm\:ss");
+				registro.Profissional = _sessao.UsuarioInterno.A2UsuarioInternoNome;
+				registro.EhRegistroNovo = true;
+				var listaRegistros = _sessao.RegistrosEvolucaoEnfermagem;
+				listaRegistros.Add(registro);
+				_sessao.RegistrosEvolucaoEnfermagem = listaRegistros;
+
+				return Json(new { RegistrosEnfermagem = _sessao.RegistrosEvolucaoEnfermagem.OrderBy(c => c.ID) });
+			}
+			catch (Exception ex)
+			{
+				return Json(new { RegistrosEnfermagem ="", MensagemErro = ex.Message });
+			}
+		}
+
+		[HttpPost]
+		public IActionResult DeletarRegistroEnfermagem(int idRegistro)
+		{
+			try
+			{
+				var listaRegistro = _sessao.RegistrosEvolucaoEnfermagem;
+				var registroDeletado = listaRegistro.Where(c => c.ID == idRegistro).FirstOrDefault();
+				listaRegistro.Remove(registroDeletado);
+				_sessao.RegistrosEvolucaoEnfermagem = listaRegistro;
+				return Json(new { RegistrosEnfermagem = _sessao.RegistrosEvolucaoEnfermagem });
+			}
+			catch (Exception ex)
+			{
+				return Json(new { RegistrosEnfermagem = "", MensagemErro = ex.Message });
 			}
 		}
 	}

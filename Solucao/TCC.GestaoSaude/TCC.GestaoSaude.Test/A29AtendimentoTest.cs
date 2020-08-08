@@ -25,6 +25,9 @@ namespace TCC.GestaoSaude.Test
 		private readonly IA1UsuarioRepositorio _usuarioRepositorio;
 		private readonly IA9ProntuarioRepositorio _prontuarioRepositorio;
 		private readonly IA10RegistroEvolucaoEnfermagemRepositorio _registroEvolucaoEnfermagemRepositorio;
+		private readonly IA13ProfissionalRepositorio _profissionalRepositorio;
+		private readonly IA2UsuarioInternoRepositorio _usuarioInternoRepositorio;
+
 		public A29AtendimentoTest() 
 		{
 			var services = new ServiceCollection();
@@ -32,7 +35,10 @@ namespace TCC.GestaoSaude.Test
 			services.AddTransient<IA29AtendimentoRepositorio, A29AtendimentoRepositorio>();
 			services.AddTransient<IA1UsuarioRepositorio, A1UsuarioRepositorio>();
 			services.AddTransient<IA9ProntuarioRepositorio, A9ProntuarioRepositorio>();
+			services.AddTransient<IA13ProfissionalRepositorio, A13ProfissionalRepositorio>();
 			services.AddTransient<IA10RegistroEvolucaoEnfermagemRepositorio, A10RegistroEvolucaoEnfermagemRepositorio>();
+			services.AddTransient<IA2UsuarioInternoRepositorio, A2UsuarioInternoRepositorio>();
+
 			services.AddEntityFrameworkSqlServer()
 				.AddDbContext<GestaoSaudeContext>(options => options.UseSqlServer(A1UsuarioTest.connectionString, b => b.MigrationsAssembly("TCC.GestaoSaude.DataAccess")));
 			var serviceProvider = services.BuildServiceProvider();
@@ -41,6 +47,8 @@ namespace TCC.GestaoSaude.Test
 			_usuarioRepositorio = serviceProvider.GetService<IA1UsuarioRepositorio>();
 			_prontuarioRepositorio = serviceProvider.GetService<IA9ProntuarioRepositorio>();
 			_registroEvolucaoEnfermagemRepositorio = serviceProvider.GetService<IA10RegistroEvolucaoEnfermagemRepositorio>();
+			_profissionalRepositorio = serviceProvider.GetService<IA13ProfissionalRepositorio>();
+			_usuarioInternoRepositorio = serviceProvider.GetService<IA2UsuarioInternoRepositorio>();
 		}
 
 		[Fact]
@@ -54,7 +62,7 @@ namespace TCC.GestaoSaude.Test
 			atendimento.A29Data = DateTime.Now;
 			atendimento.A3InformacaoCadastroId = usuario.A3InformacaoCadastro.ToList()[0].A3InformacaoCadastroId;
 		
-			var numeroAtendimento = new A29AtendimentoBusiness(_atendimentoRepositorio, null, null).CadastrarAtendimento(atendimento);
+			var numeroAtendimento = new A29AtendimentoBusiness(_atendimentoRepositorio, null, null, null,_profissionalRepositorio,_usuarioInternoRepositorio).CadastrarAtendimento(atendimento);
 
 			Assert.True(numeroAtendimento > 0);
 		}
@@ -64,7 +72,7 @@ namespace TCC.GestaoSaude.Test
 		{
 			int id = _atendimentoRepositorio.GetAll().FirstOrDefault().A29AtendimentoId;
 
-			var atendimento = new A29AtendimentoBusiness(_atendimentoRepositorio, _prontuarioRepositorio, _registroEvolucaoEnfermagemRepositorio).BuscarAtendimento(id);
+			var atendimento = new A29AtendimentoBusiness(_atendimentoRepositorio, _prontuarioRepositorio, _registroEvolucaoEnfermagemRepositorio,_usuarioRepositorio,_profissionalRepositorio,_usuarioInternoRepositorio).BuscarAtendimento(id);
 
 			Assert.True(atendimento != null);
 		}

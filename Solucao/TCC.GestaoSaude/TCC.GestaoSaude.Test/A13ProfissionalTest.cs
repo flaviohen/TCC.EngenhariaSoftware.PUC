@@ -22,17 +22,20 @@ namespace TCC.GestaoSaude.Test
 	{
 		
 		private readonly IA13ProfissionalRepositorio _profissionalRepositorio;
+		private readonly IA2UsuarioInternoRepositorio _usuarioInternoRepositorio;
 		public A13ProfissionalTest() 
 		{
 			var services = new ServiceCollection();
 
 			services.AddTransient<IA13ProfissionalRepositorio, A13ProfissionalRepositorio>();
+			services.AddTransient<IA2UsuarioInternoRepositorio, A2UsuarioInternoRepositorio>();
 
 			services.AddEntityFrameworkSqlServer()
 				.AddDbContext<GestaoSaudeContext>(options => options.UseSqlServer(A1UsuarioTest.connectionString, b => b.MigrationsAssembly("TCC.GestaoSaude.DataAccess")));
 			var serviceProvider = services.BuildServiceProvider();
 
 			_profissionalRepositorio = serviceProvider.GetService<IA13ProfissionalRepositorio>();
+			_usuarioInternoRepositorio = serviceProvider.GetService<IA2UsuarioInternoRepositorio>();
 		}
 
 		[Fact]
@@ -45,11 +48,19 @@ namespace TCC.GestaoSaude.Test
 			profissional.A13ProfissionalData = DateTime.Now;
 		
 
-			var usuarioRetornado = new A13ProfissionalBusiness(_profissionalRepositorio).CadastrarProfissional(profissional);
+			var usuarioRetornado = new A13ProfissionalBusiness(_profissionalRepositorio,_usuarioInternoRepositorio).CadastrarProfissional(profissional);
 
 			Assert.True(usuarioRetornado != null && profissional.Mensagens.Count == 0);
 		}
 
-		
+		[Fact]
+		public void RetornarProfissionalTest() 
+		{
+			string codigoCNS = _profissionalRepositorio.GetAll().FirstOrDefault().A13ProfissionalCodigoCns;
+
+			var profissional = new A13ProfissionalBusiness(_profissionalRepositorio,_usuarioInternoRepositorio).RetornarProfissional(codigoCNS);
+
+			Assert.True(profissional != null);
+		}		
 	}
 }

@@ -58,5 +58,31 @@ namespace TCC.GestaoSaude.Business
 				return usuario;
 			}
 		}
+
+		public A2UsuarioInterno BuscarUsuarioInternoPorID(int id) 
+		{
+			try
+			{
+				A2UsuarioInterno usuarioInterno = _usuarioInternoRepositorio.Find(c => c.A2UsuarioInternoId == id);
+				if (usuarioInterno == null)
+				{
+					usuarioInterno = new A2UsuarioInterno();
+					Mensagem msg = new Mensagem();
+					msg.TipoMensagem = TipoMensagem.Atencao;
+					msg.DescricaoMensagem = Common.MensagensSistema.MsgsSistema.MsgProfissionalExistente;
+					usuarioInterno.Mensagens.Add(msg);
+				}
+				return usuarioInterno;
+			}
+			catch (Exception ex)
+			{
+				A2UsuarioInterno usuarioInterno = new A2UsuarioInterno();
+				Mensagem msg = new Mensagem();
+				msg.TipoMensagem = TipoMensagem.Erro;
+				msg.DescricaoMensagem = ex.Message;
+				usuarioInterno.Mensagens.Add(msg);
+				return usuarioInterno;
+			}
+		}
 	}
 }

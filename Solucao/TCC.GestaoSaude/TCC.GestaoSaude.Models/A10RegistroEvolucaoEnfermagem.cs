@@ -39,5 +39,8 @@ namespace TCC.GestaoSaude.Models
 
         [NotMapped]
         public List<Mensagem> Mensagens { get; set; }
+
+        [NotMapped]
+        public bool EhRegistroNovo { get; set; }
     }
 }

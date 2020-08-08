@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using TCC.GestaoSaude.Common;
 using TCC.GestaoSaude.DataAccess.Interface;
@@ -13,11 +14,22 @@ namespace TCC.GestaoSaude.Business
 		private readonly IA29AtendimentoRepositorio _atendimentoRepositorio;
 		private readonly IA9ProntuarioRepositorio _prontuarioRepositorio;
 		private readonly IA10RegistroEvolucaoEnfermagemRepositorio _registroEvolucaoEnfermagemRepositorio;
-		public A29AtendimentoBusiness(IA29AtendimentoRepositorio atendimentoRepositorio, IA9ProntuarioRepositorio prontuarioRepositorio, IA10RegistroEvolucaoEnfermagemRepositorio registroEvolucaoEnfermagemRepositorio) 
+		private readonly IA1UsuarioRepositorio _usuarioRepositorio;
+		private readonly IA13ProfissionalRepositorio _profissionalRepositorio;
+		private readonly IA2UsuarioInternoRepositorio _usuarioInternoRepositorio;
+		public A29AtendimentoBusiness(IA29AtendimentoRepositorio atendimentoRepositorio, 
+									  IA9ProntuarioRepositorio prontuarioRepositorio, 
+									  IA10RegistroEvolucaoEnfermagemRepositorio registroEvolucaoEnfermagemRepositorio,
+									  IA1UsuarioRepositorio usuarioRepositorio,
+									  IA13ProfissionalRepositorio profissionalRepositorio,
+									  IA2UsuarioInternoRepositorio usuarioInternoRepositorio) 
 		{
 			_atendimentoRepositorio = atendimentoRepositorio;
 			_prontuarioRepositorio = prontuarioRepositorio;
 			_registroEvolucaoEnfermagemRepositorio = registroEvolucaoEnfermagemRepositorio;
+			_usuarioRepositorio = usuarioRepositorio;
+			_profissionalRepositorio = profissionalRepositorio;
+			_usuarioInternoRepositorio = usuarioInternoRepositorio;
 		}
 
 		public int CadastrarAtendimento(A29Atendimento atendimento) 
@@ -48,12 +60,13 @@ namespace TCC.GestaoSaude.Business
 				atendimento = _atendimentoRepositorio.Find(c => c.A29AtendimentoId == codigoAtendimento, includes);
 				if (atendimento != null)
 				{
+					atendimento.A3InformacaoCadastro.A1Usuario = _usuarioRepositorio.Get(atendimento.A3InformacaoCadastro.A1UsuarioId);
 					if (atendimento.RelAtendimentoProntuario.Count > 0) 
 					{
 						int idProntuario = atendimento.RelAtendimentoProntuario.ToList()[0].A9ProntuarioId;
 						if (idProntuario > 0) 
 						{
-							atendimento.RelAtendimentoProntuario.ToList()[0].A9Prontuario = new A9ProntuarioBusiness(_prontuarioRepositorio, _registroEvolucaoEnfermagemRepositorio, null).BuscarProntuarioPorCodigo(idProntuario);
+							atendimento.RelAtendimentoProntuario.ToList()[0].A9Prontuario = new A9ProntuarioBusiness(_prontuarioRepositorio, _registroEvolucaoEnfermagemRepositorio, null,_profissionalRepositorio,_usuarioInternoRepositorio).BuscarProntuarioPorCodigo(idProntuario);
 						} 
 					}
 					return atendimento;

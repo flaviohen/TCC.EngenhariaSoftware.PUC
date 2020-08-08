@@ -88,5 +88,15 @@ namespace TCC.GestaoSaude.Test
 
 			Assert.True(usuarioInterno != null);
 		}
+
+		[Fact]
+		public void BuscarUsuarioInternoPorIDTest() 
+		{
+			var idUsuarioInterno = _usuarioInternoRepositorio.GetAll().FirstOrDefault().A2UsuarioInternoId;
+
+			var usuarioInterno = new A2UsuarioInternoBusiness(_usuarioInternoRepositorio).BuscarUsuarioInternoPorID(idUsuarioInterno);
+
+			Assert.True(usuarioInterno != null);
+		}
 	}
 }

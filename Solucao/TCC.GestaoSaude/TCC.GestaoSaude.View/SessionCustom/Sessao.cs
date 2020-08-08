@@ -12,7 +12,8 @@ namespace TCC.GestaoSaude.View.SessionCustom
 	public enum NomeSessao
 	{
 		UsuarioExterno,
-		UsuarioInterno
+		UsuarioInterno,
+		RegistroEvolucaoEnfermagem
 	}
 	public class Sessao : Controller
 	{
@@ -46,6 +47,19 @@ namespace TCC.GestaoSaude.View.SessionCustom
 			set
 			{
 				_httpContextAccessor.HttpContext.Session.SetObjectAsJson(NomeSessao.UsuarioInterno.ToString(), value);
+			}
+		}
+
+		public List<RegistroEnfermagemViewModel> RegistrosEvolucaoEnfermagem 
+		{
+			get
+			{
+				return _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<RegistroEnfermagemViewModel>>(NomeSessao.RegistroEvolucaoEnfermagem.ToString());
+			}
+
+			set
+			{
+				_httpContextAccessor.HttpContext.Session.SetObjectAsJson(NomeSessao.RegistroEvolucaoEnfermagem.ToString(), value);
 			}
 		}
 

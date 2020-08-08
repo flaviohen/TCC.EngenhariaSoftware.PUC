@@ -1,0 +1,264 @@
+﻿
+@{
+    ViewData["Title"] = "Preenchimento prontuário";
+    Layout = "~/Views/Shared/_LayoutPainel.cshtml";
+}
+<script src="~/js/Prontuario.js"></script>
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb">
+        <a asp-controller="Painel" asp-action="PaginaInicial" title="Ir para Home" class="tip-bottom"><i class="icon-home"></i> Home ></a>
+        <a asp-controller="Painel" asp-action="PreencherProntuario" title="Novo atendimento" class="tip-bottom"><i class="icon-th-list"></i> Preenchimento prontuário</a>
+    </div>
+</div>
+<!--End-breadcrumbs-->
+<!--Action boxes-->
+<div class="container-fluid">
+    <div class="quick-actions_homepage">
+        <ul class="quick-actions">
+            <li class="bg_lo span3"><a href="#"><i class="icon-th-list"></i>Preenchimento de Prontuário</a></li>
+        </ul>
+    </div>
+    <!--End-Action boxes-->
+    <hr>
+    <div class="row-fluid">
+        <div class="span10">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Pesquisar atendimento</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <div class="controls controls-row" style="margin-top:10px; margin-left:3px;">
+                        <input type="text" class="form-control span5 m-wrap" id="txtnumeroAtendimento" placeholder="numero do atendimento" />
+                        <button type="button" class="btn btn-success span1" id="btnPesquisar"><i class="icon icon-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="alert alert-warning span8" role="alert" id="alerta">
+    </div>
+
+    <div class="alert alert-success span8" role="alert" id="sucesso">
+    </div>
+
+    <div class="alert alert-danger span8" role="alert" id="erro">
+    </div>
+
+    <div class="row-fluid" id="FormularioDadosBasicoPaciente">
+        <div class="span10">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Dados básicos do paciente</h5>
+                </div>
+                <div class="widget-content">
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <label for="txtFormCPF"><b>CPF:</b> <label id="lblNumeroCPF"></label></label>
+                            <input type="hidden" id="hdnIDUsuario" value="0" />
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="controls controls-row">
+                        <div class="span7">
+                            <label for="txtNomeCompleto"><b>Nome Completo:</b> </label><label id="lblNomeCompleto"></label>
+                        </div>
+                        <div class="span5">
+                            <label for="txtDataNascimento"><b>Data de Nascimento:</b> </label><label id="lblDataNascimento"></label>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <label for="txtNomeMae"><b>Nome da Mãe:</b></label><label id="lblNomeMae"></label>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <label for="txtNomePai"><b>Nome da Pai:</b> </label><label id="lblNomePai"></label>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="controls controls-row">
+                        <div class="span5">
+                            <label for="txtNumeroCarteiraSUS"><b>Numero carteira SUS:</b> </label><label id="lblCarteiraSus"></label>
+                        </div>
+                        <div class="span4">
+                            <label for="txtTelefoneResidencial"><b>Telefone Residencial:</b> </label><label id="lblTelefone"></label>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="controls controls-row">
+                        <div class="span4">
+                            <label for="txtTelefoneCelular"><b>Telefone Celular:</b> </label><label id="lblCelular"></label>
+                        </div>
+                        <div class="span8">
+                            <label for="txtEmail"><b>Email:</b></label><label id="lblEmail"></label>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="controls controls-row">
+                        <div class="span3" style="float:right;margin-right:-73px;">
+                            <button type="button" class="btn btn-primary" id="btnCriarProntuario">Criar Prontuário</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid" id="FormularioProntuario">
+        <div class="span10">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Prontuário</h5>
+                </div>
+                <div class="widget-content">
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <fieldset>
+                                <legend>Registro de enfermangem:</legend>
+                                <div class="span12">
+                                    <textarea id="textAreaRegistroEnfermagem" rows="5" class="span11">
+
+                                    </textarea>
+                                </div>
+                                <div class="span11" style="margin-bottom:10px;">
+                                    <button type="button" id="btnAdicionarRegistro" class="btn btn-primary span4" style="margin-left:250px;">Adicionar registro</button>
+                                </div>
+                                <div class="span11" id="tableRegistrosEnfermagem">
+                                    
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <fieldset>
+                                <legend>Raciocinio médico:</legend>
+                                <textarea id="textAreaRaciocinioMedico" row="5" class="span11">
+
+                                </textarea>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <fieldset>
+                                <legend>Hipotese diagnostica:</legend>
+                                <textarea id="textAreaHipoteseDiagnostica" row="5" class="span11">
+
+                                </textarea>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <fieldset>
+                                <legend>Conduta terapeuta:</legend>
+                                <textarea id="textAreaCondutaTerapeuta" row="5" class="span11">
+
+                                </textarea>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <fieldset>
+                                <legend>Prescrição Médica:</legend>
+                                <textarea id="textAreaPrescricaoMedica" row="5" class="span11">
+
+                                </textarea>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <fieldset>
+                                <legend>Descrição Cirurgica:</legend>
+                                <textarea id="textAreaDescricaoCirurgica" row="5" class="span11">
+
+                                </textarea>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span12">
+                            <fieldset>
+                                <legend>Diagnostico Médico:</legend>
+                                <textarea id="textAreaDiagnosticoMedico" row="5" class="span11">
+
+                                </textarea>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span3" style="margin-right:250px;">
+                            <button type="button" class="btn btn-primary" id="btnCadastrarProntuario">Cadastrar</button>
+                            <button type="button" class="btn btn-primary" id="btnAtualizar">Atualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Confirmação de atendimento</h3>
+        </div>
+        <div class="modal-body">
+            <p>Confirma o cadastro do atendimento ao paciente?</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button type="button" id="btnCadastrar" class="btn btn-primary">OK</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    var url = '@Url.Action("PesquisarPorCodigoAtendimento", "Painel")';
+    var urlAddRegistro = '@Url.Action("AdicionarRegistroEnfermagem","Painel")';
+    var urlDeleteRegistro = '@Url.Action("DeletarRegistroEnfermagem", "Painel")';
+    $(document).ready(function () {
+        $("#FormularioDadosBasicoPaciente").hide();
+        $("#FormularioProntuario").hide();
+        $("#alerta").hide();
+        $("#sucesso").hide();
+        $("#erro").hide();
+
+        $("#btnCriarProntuario").click(function () {
+            $("#FormularioProntuario").show();
+        });
+
+        $("#btnPesquisar").click(function () {
+            $("#FormularioDadosBasicoPaciente").hide();
+            $("#FormularioProntuario").hide();
+            PesquisarPorNumeroAtendimento($("#txtnumeroAtendimento").val(), url);
+        });
+
+        $("#btnCadastrar").click(function () {
+            //CadastrarNovoAtendimento(urlCadastrarAtendimento);
+            $("#closeModal").click();
+        });
+
+        $("#btnAdicionarRegistro").click(function () {
+            let textoRegistro = $("#textAreaRegistroEnfermagem").val();
+            if (textoRegistro != "")
+            {
+                AdicionarRegistroEnfermagem($("#textAreaRegistroEnfermagem").val(), urlAddRegistro, urlDeleteRegistro);
+            } 
+        });
+
+
+    });
+</script>
+

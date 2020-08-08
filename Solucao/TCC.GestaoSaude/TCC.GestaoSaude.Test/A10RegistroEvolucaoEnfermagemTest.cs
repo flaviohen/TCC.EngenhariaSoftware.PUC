@@ -22,17 +22,23 @@ namespace TCC.GestaoSaude.Test
 	{
 		
 		private readonly IA10RegistroEvolucaoEnfermagemRepositorio _registroEvolucaoEnfermagemRepositorio;
+		private readonly IA13ProfissionalRepositorio _profissionalRepositorio;
+		private readonly IA2UsuarioInternoRepositorio _usuarioInternoRepositorio;
 		public A10RegistroEvolucaoEnfermagemTest() 
 		{
 			var services = new ServiceCollection();
 
 			services.AddTransient<IA10RegistroEvolucaoEnfermagemRepositorio, A10RegistroEvolucaoEnfermagemRepositorio>();
+			services.AddTransient<IA13ProfissionalRepositorio, A13ProfissionalRepositorio>();
+			services.AddTransient<IA2UsuarioInternoRepositorio, A2UsuarioInternoRepositorio>();
 
 			services.AddEntityFrameworkSqlServer()
 				.AddDbContext<GestaoSaudeContext>(options => options.UseSqlServer(A1UsuarioTest.connectionString, b => b.MigrationsAssembly("TCC.GestaoSaude.DataAccess")));
 			var serviceProvider = services.BuildServiceProvider();
 
 			_registroEvolucaoEnfermagemRepositorio = serviceProvider.GetService<IA10RegistroEvolucaoEnfermagemRepositorio>();
+			_profissionalRepositorio = serviceProvider.GetService<IA13ProfissionalRepositorio>();
+			_usuarioInternoRepositorio = serviceProvider.GetService<IA2UsuarioInternoRepositorio>();
 		}
 
 		[Fact]
@@ -47,7 +53,7 @@ namespace TCC.GestaoSaude.Test
 
 			List<A10RegistroEvolucaoEnfermagem> lstRegistros = new List<A10RegistroEvolucaoEnfermagem>();
 			lstRegistros.Add(registroEvolucaoEnfermagem);
-			var registroCadastrados = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio).CadastrarRegistrosEnfermagem(lstRegistros);
+			var registroCadastrados = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio,_profissionalRepositorio,_usuarioInternoRepositorio).CadastrarRegistrosEnfermagem(lstRegistros);
 
 			Assert.True(registroCadastrados.Count > 0);
 
@@ -59,7 +65,7 @@ namespace TCC.GestaoSaude.Test
 		{
 			var id = _registroEvolucaoEnfermagemRepositorio.GetAll().FirstOrDefault().A10RegistroEvolucaoEnfermagemId;
 
-			var registroRetornado = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio).BuscarRegistroEvolucaoEnfermagemPorCodigo(id);
+			var registroRetornado = new A10RegistroEvolucaoEnfermagemBusiness(_registroEvolucaoEnfermagemRepositorio, _profissionalRepositorio,_usuarioInternoRepositorio).BuscarRegistroEvolucaoEnfermagemPorCodigo(id);
 
 			Assert.True(registroRetornado != null);
 		}
