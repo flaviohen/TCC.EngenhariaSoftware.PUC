@@ -79,6 +79,15 @@ namespace TCC.GestaoSaude.Common.MensagensSistema {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi encontrado estabelecimentos com os dados informados na busca..
+        /// </summary>
+        public static string MsgEstabelecimentosNaoEncontrado {
+            get {
+                return ResourceManager.GetString("MsgEstabelecimentosNaoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Não existe estabelecimento para o codigo informado..
         /// </summary>
         public static string MsgNaoExisteEstabelecimento {

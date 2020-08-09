@@ -44,9 +44,9 @@ namespace TCC.GestaoSaude.Test
 			A21Estabelecimento estabelecimento = new A21Estabelecimento();
 			estabelecimento.A20TipoEstabelecimento = new A20TipoEstabelecimentoBusiness(_tipoEstabelecimentoRepositorio).RetornarTiposEstabelecimento().FirstOrDefault();
 			estabelecimento.A21EstabelecimentoBairro = "VALE DO PARAIBA";
-			estabelecimento.A21EstabelecimentoCep = "27350000";
+			estabelecimento.A21EstabelecimentoCep = "03943000";
 			estabelecimento.A21EstabelecimentoCnpj = "28695658000184";
-			estabelecimento.A21EstabelecimentoCodigoEstabelecimento = "2289105";
+			estabelecimento.A21EstabelecimentoCodigoEstabelecimento = "2292483";
 			estabelecimento.A21EstabelecimentoCodigoUnidade = "RJ0000330040000000000000033634";
 			estabelecimento.A21EstabelecimentoComplemento = "";
 			estabelecimento.A21EstabelecimentoDataAtualizacao = new DateTime(2001,8,21);

@@ -1,0 +1,212 @@
+﻿@using TCC.GestaoSaude.Models
+@{
+    ViewData["Title"] = "GerenciarEstabelecimento";
+    Layout = "~/Views/Shared/_LayoutPainel.cshtml";
+}
+<script src="~/js/Estabelecimento.js"></script>
+<div id="content-header">
+    <div id="breadcrumb">
+        <a asp-controller="Painel" asp-action="PaginaInicial" title="Ir para Home" class="tip-bottom"><i class="icon-home"></i> Home ></a>
+        <a asp-controller="Estabelecimento" asp-action="GerenciarEstabelecimento" title="Gerenciar Estabelecimento" class="tip-bottom"><i class="icon-th-list"></i> Estabelecimento de Saúde</a>
+    </div>
+</div>
+<!--End-breadcrumbs-->
+
+<div class="container-fluid">
+    <div class="quick-actions_homepage">
+        <ul class="quick-actions">
+            <li class="bg_lo span3"><a href="#"><i class="icon-th-list"></i>Estabelecimento de saúde</a></li>
+        </ul>
+    </div>
+    <div class="row-fluid">
+        <div class="span10">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Pesquisar estabelecimento</h5>
+                </div>
+                <div class="widget-content">
+                    <div class="controls controls-row">
+                        <div class="span3">
+                            <label for="ddlTipoEstabelecimento"><b>Tipo Estabelecimento</b> </label>
+                            <select id="ddlTipoEstabelecimento" class="span12">
+                                @foreach (A20TipoEstabelecimento item in (List<A20TipoEstabelecimento>)ViewBag.TiposEstabelecimento)
+                                {
+                                    <option value="@item.A20TipoEstabelecimentoId">@item.A20TipoEstabelecimentoDescricao</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="span4">
+                            <label for="txtCep"><b>CEP:</b> </label>
+                            <input type="text" class="span12" id="txtCep" value="" />
+                        </div>
+                        <div class="span4">
+                            <label for="txtNumeroCNES"><b>Numero CNES:</b> </label>
+                            <input type="text" class="span12" id="txtNumeroCNES" value="" />
+                        </div>
+                        <div class="span1" style="margin-top:25px;">
+                            <button type="button" id="btnPesquisarEstabelecimento" class="btn btn-success span12"><i class="icon icon-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span4">
+                            <button type="button" id="btnAdicionarNovoEstabelecimento" class="btn btn-primary">Novo estabelecimento de Saúde</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid" id="TabelaEstabelecimentos">
+        <div class="span10">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Estabelecimentos</h5>
+                </div>
+                <div class="widget-content">
+                    <div class="controls controls-row">
+                        <div class="span12" id="tableEstabelecimento">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid" id="FormularioNovoEstabelecimento">
+        <div class="span10">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Formulario novo estabelecimento</h5>
+                </div>
+                <div class="widget-content">
+                    <div class="controls controls-row">
+                        <div class="span6">
+                            <label for="ddlTipoEstabelecimento2">Tipo de estabelecimento:</label>
+                            <select id="ddlTiposEstabelecimento2" class="span12">
+                                @foreach (A20TipoEstabelecimento item in (List<A20TipoEstabelecimento>)ViewBag.TiposEstabelecimento)
+                                {
+                                    <option value="@item.A20TipoEstabelecimentoId">@item.A20TipoEstabelecimentoDescricao</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="span6">
+                            <label for="txtCodigoUnidade">Codigo da Unidade:</label>
+                            <input type="text" id="txtCodigoUnidade" class="span12" value="" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span6">
+                            <label for="txtCNES">CNES:</label>
+                            <input type="text" id="txtCNES" class="span12" value="" />
+                        </div>
+                        <div class="span6">
+                            <label for="txtCNPJ">CNPJ:</label>
+                            <input type="text" id="txtCNPJ"class="span12" value="" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span6">
+                            <label for="txtRazaoSocial">Razão Social:</label>
+                            <input type="text" id="txtRazaoSocial" class="span12" value="" />
+                        </div>
+                        <div class="span6">
+                            <label for="txtNomeFantasia">Nome Fantasia:</label>
+                            <input type="text" id="txtNomeFantasia"class="span12" value="" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span3">
+                            <label for="txtCep2">CEP:</label>
+                            <input type="text" id="txtCep2" class="span12" value="" />
+                        </div>
+                        <div class="span1" style="margin-top:25px;">
+                            <button type="button" id="btnPesquisarCep" class="btn btn-success span12"><i class="icon icon-search"></i></button>
+                        </div>
+                        <div class="span3">
+                            <label for="txtComplemento">Complemento:</label>
+                            <input type="text" id="txtComplemento" class="span12" value="" />
+                        </div>
+                        <div class="span3">
+                            <label for="txtNumero">Número</label>
+                            <input type="text" id="txtNumero" class="span12" value="" />
+                        </div>
+                        <div class="span2">
+                            <label for="txtEstado">UF</label>
+                            <input type="text" id="txtEstado" class="span12" readonly="readonly" value="" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span4">
+                            <label for="txtLogradouro">Logradouro:</label>
+                            <input type="text" id="txtLogradouro" class="span12" readonly="readonly" value="" />
+                        </div>
+                        <div class="span4">
+                            <label for="txtEndereco">Endereço:</label>
+                            <input type="text" id="txtEndereco" class="span12" readonly="readonly" value="" />
+                        </div>
+                        <div class="span4">
+                            <label for="txtBairro">Bairro:</label>
+                            <input type="text" id="txtBairro" class="span12" readonly="readonly" value="" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span4">
+                            <label for="txtTelefone">Telefone:</label>
+                            <input type="text" id="txtTelefone" class="span12" readonly="readonly" value="" />
+                        </div>
+                        <div class="span4">
+                            <label for="txtFax">Fax:</label>
+                            <input type="text" id="txtFax" class="span12" readonly="readonly" value="" />
+                        </div>
+                        <div class="span4">
+                            <label for="txtEmail">E-mail:</label>
+                            <input type="text" id="txtEmail" class="span12" readonly="readonly" value="" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span4">
+                            <label for="txtLatitude">Latitude:</label>
+                            <input type="text" id="txtLatitude" class="span12" value="" />
+                        </div>
+                        <div class="span4">
+                            <label for="txtLongitude">Longitude:</label>
+                            <input type="text" id="txtLongitude" class="span12" value="" />
+                        </div>
+                    </div>
+                    <div class="controls controls-row">
+                        <div class="span3" style="float:right;">
+                            <button type="button" id="btnCadastrarEstabelecimento"  class="btn btn-primary span12">Cadastrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+    var urlPesquisarEstabelecimento = '@Url.Action("PesquisarEstabelecimento", "Estabelecimento")';
+    var urlEditar = '@Url.Action("EditarEstabelecimento","Estabelecimento")';
+    var urlDeletar = '@Url.Action("DeletarEstabelecimento","Estabelecimento")';
+
+    $(document).ready(function () {
+        $("#FormularioNovoEstabelecimento").hide();
+        $("#TabelaEstabelecimentos").hide();
+
+        $("#btnPesquisarEstabelecimento").click(function () {
+            let tpEstabelecimento = $("#ddlTipoEstabelecimento").val();
+            let numCep = $("#txtCep").val();
+            let numeroCNES = $("txtNumeroCNES").val();
+            PesquisarEstabelecimento(tpEstabelecimento, numCep, numeroCNES, urlPesquisarEstabelecimento, urlDeletar, urlEditar);
+        });
+
+        $("#btnAdicionarNovoEstabelecimento").click(function () {
+            $("#TabelaEstabelecimentos").hide();
+            $("#FormularioNovoEstabelecimento").show();
+        });
+    });
+</script>

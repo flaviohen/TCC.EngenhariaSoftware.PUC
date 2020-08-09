@@ -49,15 +49,15 @@ namespace TCC.GestaoSaude.View.Models
 			ItemMenu item = new ItemMenu();
 			item.Id = 1;
 			item.Acao = "EstoqueMedicamentos";
-			item.Controller = "Painel";
+			item.Controller = "Estabelecimento";
 			item.Icone = "icon icon-book";
 			item.TextoMenu = "Gerenciar estoque de Medicamentos";
 			items.Add(item);
 
 			item = new ItemMenu();
 			item.Id = 2;
-			item.Acao = "GerenciarEstabelecimentoSaude";
-			item.Controller = "Painel";
+			item.Acao = "GerenciarEstabelecimento";
+			item.Controller = "Estabelecimento";
 			item.Icone = "icon icon-sitemap";
 			item.TextoMenu = "Gerenciar estabelecimentos de Saúde";
 			items.Add(item);
@@ -65,7 +65,7 @@ namespace TCC.GestaoSaude.View.Models
 			item = new ItemMenu();
 			item.Id = 3;
 			item.Acao = "GerenciarProfissionalSaude";
-			item.Controller = "Painel";
+			item.Controller = "Estabelecimento";
 			item.Icone = "icon icon-group";
 			item.TextoMenu = "Gerenciar profissionais de saúde";
 			items.Add(item);
@@ -73,7 +73,7 @@ namespace TCC.GestaoSaude.View.Models
 			item = new ItemMenu();
 			item.Id = 4;
 			item.Acao = "GerenciarUsuarioSistema";
-			item.Controller = "Painel";
+			item.Controller = "Estabelecimento";
 			item.Icone = "icon icon-group";
 			item.TextoMenu = "Gerenciar usuarios do sistema";
 			items.Add(item);
@@ -81,7 +81,7 @@ namespace TCC.GestaoSaude.View.Models
 			item = new ItemMenu();
 			item.Id = 5;
 			item.Acao = "GerenciarTiposExameProcedimento";
-			item.Controller = "Painel";
+			item.Controller = "Estabelecimento";
 			item.Icone = "icon icon-list-ol";
 			item.TextoMenu = "Gerenciar tipos de exame e procedimentos";
 			items.Add(item);

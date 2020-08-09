@@ -123,6 +123,9 @@
   <data name="MsgEstabelecimentoExistente" xml:space="preserve">
     <value>Já existe estabelecimento cadastrado com este codigo de estabelecimento</value>
   </data>
+  <data name="MsgEstabelecimentosNaoEncontrado" xml:space="preserve">
+    <value>Não foi encontrado estabelecimentos com os dados informados na busca.</value>
+  </data>
   <data name="MsgNaoExisteEstabelecimento" xml:space="preserve">
     <value>Não existe estabelecimento para o codigo informado.</value>
   </data>
