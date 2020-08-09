@@ -44,6 +44,7 @@ namespace TCC.GestaoSaude.View
 			services.AddTransient<IA2UsuarioInternoRepositorio, A2UsuarioInternoRepositorio>();
 			services.AddTransient<IA6PerfilRepositorio, A6PerfilRepositorio>();
 			services.AddTransient<IA9ProntuarioRepositorio, A9ProntuarioRepositorio>();
+			services.AddTransient<IRelHistoricoEvolucaoEnfermagemRepositorio, RelHistoricoEvolucaoEnfermagemRepositorio>();
 			services.AddTransient<IEmailEnvio, EnvioEmail>();
 		}
 

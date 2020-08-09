@@ -7,22 +7,22 @@ function Notificacao(mensagemErro, mensagemSucesso, mensagemAlerta, posicaoNotif
     let tipoMensagem = '';
     let icone = '';
     let mensagem = ''
-    if (mensagemErro != null)
+    if (mensagemErro !== null)
     {
         tipoMensagem = "error";
-        icone = "<i class=''></i>";
+        icone = "<i class='icon icon-remove'></i>";
         mensagem = mensagemErro;
     }
-    if (mensagemSucesso != null)
+    if (mensagemSucesso !== null)
     {
         tipoMensagem = "success";
-        icone = "<i class=''></i>";
+        icone = "<i class='icon icon-ok'></i>";
         mensagem = mensagemSucesso
     }
-    if (mensagemAlerta != null)
+    if (mensagemAlerta !== null)
     {
-        tipoMensagem = "Info";
-        icone = "<i class=''></i>";
+        tipoMensagem = "warning";
+        icone = "<i class='icon icon-warning-sign'></i>";
         mensagem = mensagemAlerta;
     }
 

@@ -12,6 +12,7 @@ namespace TCC.GestaoSaude.View.Models
 		public string Hora { get; set; }
 		public string Descricao { get; set; }
 		public string Profissional { get; set; }
+		public string CodigoCNSProfissional { get; set; }
 		public bool EhRegistroNovo { get; set; }
 	}
 }

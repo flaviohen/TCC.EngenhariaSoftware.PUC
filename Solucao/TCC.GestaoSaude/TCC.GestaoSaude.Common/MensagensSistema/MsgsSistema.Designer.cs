@@ -115,6 +115,24 @@ namespace TCC.GestaoSaude.Common.MensagensSistema {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Prontuario cadastrado com sucesso.
+        /// </summary>
+        public static string MsgProntuarioCadastrado {
+            get {
+                return ResourceManager.GetString("MsgProntuarioCadastrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possivel cadastrar o prontuário para o atendimento..
+        /// </summary>
+        public static string MsgProntuarioNaoCadastrado {
+            get {
+                return ResourceManager.GetString("MsgProntuarioNaoCadastrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Prontuario não encontrado.
         /// </summary>
         public static string MsgProntuarioNaoEncontrado {

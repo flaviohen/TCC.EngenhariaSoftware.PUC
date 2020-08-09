@@ -225,9 +225,11 @@
 </div>
 
 <script>
-    var url = '@Url.Action("PesquisarPorCodigoAtendimento", "Painel")';
-    var urlAddRegistro = '@Url.Action("AdicionarRegistroEnfermagem","Painel")';
-    var urlDeleteRegistro = '@Url.Action("DeletarRegistroEnfermagem", "Painel")';
+    var url = '@Url.Action("PesquisarPorCodigoAtendimento", "Painel")'
+    var urlAddRegistro = '@Url.Action("AdicionarRegistroEnfermagem","Painel")'
+    var urlDeleteRegistro = '@Url.Action("DeletarRegistroEnfermagem", "Painel")'
+    var urlCadastrarProntuario = '@Url.Action("CadastrarProntuario", "Painel")'
+    var urlAtualizarProntuario = '@Url.Action("AtualizarProntuario","Painel")'
     $(document).ready(function () {
         $("#FormularioDadosBasicoPaciente").hide();
         $("#FormularioProntuario").hide();
@@ -254,11 +256,36 @@
             let textoRegistro = $("#textAreaRegistroEnfermagem").val();
             if (textoRegistro != "")
             {
-                AdicionarRegistroEnfermagem($("#textAreaRegistroEnfermagem").val(), urlAddRegistro, urlDeleteRegistro);
+                AdicionarRegistroEnfermagem(textoRegistro, urlAddRegistro, urlDeleteRegistro);
+                $("#textAreaRegistroEnfermagem").val("");
             } 
         });
 
+        $("#btnCadastrarProntuario").click(function () {
+            var dadosProntuario = {
+                "RaciocinioMedico": $("#textAreaRaciocinioMedico").val(),
+                "HipoteseDiagnostica": $("#textAreaHipoteseDiagnostica").val(),
+                "CondutaTerapeuta": $("#textAreaCondutaTerapeuta").val(),
+                "PrescricaoMedica": $("#textAreaPrescricaoMedica").val(),
+                "DescricaoCirurgica": $("#textAreaDescricaoCirurgica").val(),
+                "DiagnosticoMedico": $("#textAreaDiagnosticoMedico").val()
+            }
 
+            CadastrarProntuario(dadosProntuario, urlCadastrarProntuario);
+        });
+
+        $("#btnAtualizar").click(function () {
+            var dadosProntuario = {
+                "RaciocinioMedico": $("#textAreaRaciocinioMedico").val(),
+                "HipoteseDiagnostica": $("#textAreaHipoteseDiagnostica").val(),
+                "CondutaTerapeuta": $("#textAreaCondutaTerapeuta").val(),
+                "PrescricaoMedica": $("#textAreaPrescricaoMedica").val(),
+                "DescricaoCirurgica": $("#textAreaDescricaoCirurgica").val(),
+                "DiagnosticoMedico": $("#textAreaDiagnosticoMedico").val()
+            }
+
+            AtualizarProntuario(dadosProntuario, urlAtualizarProntuario);
+        });
     });
 </script>
 

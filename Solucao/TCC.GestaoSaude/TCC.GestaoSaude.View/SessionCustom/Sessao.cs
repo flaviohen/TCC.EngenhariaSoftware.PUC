@@ -13,7 +13,9 @@ namespace TCC.GestaoSaude.View.SessionCustom
 	{
 		UsuarioExterno,
 		UsuarioInterno,
-		RegistroEvolucaoEnfermagem
+		RegistroEvolucaoEnfermagem,
+		IDProntuario,
+		IDAtendimento
 	}
 	public class Sessao : Controller
 	{
@@ -60,6 +62,32 @@ namespace TCC.GestaoSaude.View.SessionCustom
 			set
 			{
 				_httpContextAccessor.HttpContext.Session.SetObjectAsJson(NomeSessao.RegistroEvolucaoEnfermagem.ToString(), value);
+			}
+		}
+
+		public int IDProntuario 
+		{
+			get
+			{
+				return _httpContextAccessor.HttpContext.Session.GetObjectFromJson<int>(NomeSessao.IDProntuario.ToString());
+			}
+
+			set
+			{
+				_httpContextAccessor.HttpContext.Session.SetObjectAsJson(NomeSessao.IDProntuario.ToString(), value);
+			}
+		}
+
+		public int IDAtendimento 
+		{
+			get
+			{
+				return _httpContextAccessor.HttpContext.Session.GetObjectFromJson<int>(NomeSessao.IDAtendimento.ToString());
+			}
+
+			set
+			{
+				_httpContextAccessor.HttpContext.Session.SetObjectAsJson(NomeSessao.IDAtendimento.ToString(), value);
 			}
 		}
 

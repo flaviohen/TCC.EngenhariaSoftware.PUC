@@ -8,9 +8,20 @@
         },
         dataType: "JSON",
         success: function (retorno) {
-            PreencherFormularioDadosBasico(retorno)
-            $("#FormularioDadosBasicoPaciente").show();
-            //Notificacao(null, "TESTE de Mensagem", null, "right", 30, 500);
+            if (retorno.dadosAtendimento !== "") {
+                PreencherFormularioDadosBasico(retorno)
+                $("#FormularioDadosBasicoPaciente").show();
+            }
+            if (retorno.mensagemAlerta !== "") {
+                Notificacao(null, null, retorno.mensagemAlerta, "right", 30, 500);
+            }
+            if (retorno.mensagemErro !== "") {
+                Notificacao(retorno.mensagemErro, null, null, "right", 30, 500);
+            }
+            if (retorno.mensagemSucesso) {
+                Notificacao(null, retorno.mensagemSucesso, null, "right", 30, 500);
+            }
+
         }
     });
 }
@@ -30,7 +41,7 @@ function PreencherFormularioDadosBasico(dados) {
         $("#btnCriarProntuario").hide();
         $("#btnCadastrarProntuario").hide();
         $("#btnAtualizar").show();
-        MontarTabelaRegistroEnfermagem(dados.registrosEnfermagem,null)
+        MontarTabelaRegistroEnfermagem(dados.registrosEnfermagem, null)
         PreencherFormularioProntuario(dados)
         $("#FormularioProntuario").show();
     }
@@ -52,7 +63,17 @@ function PreencherFormularioProntuario(dados) {
     $("#textAreaDiagnosticoMedico").val(dados.dadosAtendimento.relAtendimentoProntuario[0].a9Prontuario.a9ProntuarioDiagnosticoMedico);
 }
 
-function LimparFormularioProntuario()
+function LimparFormularioProntuario() {
+    MontarTabelaRegistroEnfermagem(null, null);
+    $("#textAreaRaciocinioMedico").val("");
+    $("#textAreaHipoteseDiagnostica").val("");
+    $("#textAreaCondutaTerapeuta").val("");
+    $("#textAreaPrescricaoMedica").val("");
+    $("#textAreaDescricaoCirurgica").val("");
+    $("#textAreaDiagnosticoMedico").val("");
+}
+
+function LimparTudo()
 {
     MontarTabelaRegistroEnfermagem(null, null);
     $("#textAreaRaciocinioMedico").val("");
@@ -61,6 +82,19 @@ function LimparFormularioProntuario()
     $("#textAreaPrescricaoMedica").val("");
     $("#textAreaDescricaoCirurgica").val("");
     $("#textAreaDiagnosticoMedico").val("");
+
+    $("#lblNumeroCPF").text("");
+    $("#lblNomeCompleto").text("")
+    $("#lblDataNascimento").text("");
+    $("#lblNomeMae").text("");
+    $("#lblNomePai").text("");
+    $("#lblCarteiraSus").text("");
+    $("#lblTelefone").text("");
+    $("#lblCelular").text("");
+    $("#lblEmail").text("");
+
+    $("#FormularioProntuario").hide();
+    $("#FormularioDadosBasicoPaciente").hide();
 }
 
 function MontarTabelaRegistroEnfermagem(dadosTabela, urlDeletarRegistro) {
@@ -77,7 +111,7 @@ function MontarTabelaRegistroEnfermagem(dadosTabela, urlDeletarRegistro) {
             linhas += `<td>${dadosTabela[i].descricao}</td>`;
             linhas += `<td>${dadosTabela[i].profissional}</td>`;
             if (dadosTabela[i].ehRegistroNovo) {
-                linhas += `<td><button type="button" class="btn btn-danger" onclick="DeletarRegistro(`+ dadosTabela[i].id + `,` + `'`+urlDeletarRegistro + `'` + `);"><i class="icon icon-trash"></i></button></td>`;
+                linhas += `<td><button type="button" class="btn btn-danger" onclick="DeletarRegistro(` + dadosTabela[i].id + `,` + `'` + urlDeletarRegistro + `'` + `);"><i class="icon icon-trash"></i></button></td>`;
             }
             else {
                 linhas += `<td></td>`;
@@ -117,7 +151,12 @@ function AdicionarRegistroEnfermagem(descricaoRegistro, url, urlDeletarRegistro)
         },
         dataType: "JSON",
         success: function (retorno) {
-            MontarTabelaRegistroEnfermagem(retorno.registrosEnfermagem, urlDeletarRegistro)
+            if (retorno.registrosEnfermagem !== "") {
+                MontarTabelaRegistroEnfermagem(retorno.registrosEnfermagem, urlDeletarRegistro)
+            }
+            if (retorno.mensagemErro !== "") {
+                Notificacao(retorno.mensagemErro, null, null, "right", 30, 500);
+            }
         }
     });
 }
@@ -132,7 +171,54 @@ function DeletarRegistro(idRegDeletar, urlDeletar) {
         },
         dataType: "JSON",
         success: function (retorno) {
-            MontarTabelaRegistroEnfermagem(retorno.registrosEnfermagem)
+            if (retorno.registrosEnfermagem !== "") {
+                MontarTabelaRegistroEnfermagem(retorno.registrosEnfermagem, urlDeletar);
+            }
+            if (retorno.mensagemErro !== "") {
+                Notificacao(retorno.mensagemErro, null, null, "right", 30, 500);
+            }
+        }
+    });
+}
+
+function CadastrarProntuario(dadosProntuario, url) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: { prontuario: JSON.stringify(dadosProntuario) },
+        dataType: "JSON",
+        success: function (retorno) {
+            if (retorno.mensagemSucesso !== "") {
+                Notificacao(null, retorno.mensagemSucesso, null, "right", 30, 300);
+            }
+            if (retorno.mensagemErro !== "") {
+                Notificacao(retorno.mensagemErro, null, null, "right", 30, 300);
+            }
+            if (retorno.mensagemAlerta !== "") {
+                Notificacao(null, null, retorno.mensagemAlerta, "right", 30, 300);
+            }
+            LimparTudo();
+        }
+    });
+}
+
+function AtualizarProntuario(dadosProntuario, url) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: { prontuario: JSON.stringify(dadosProntuario) },
+        dataType: "JSON",
+        success: function (retorno) {
+            if (retorno.mensagemSucesso !== "") {
+                Notificacao(null, retorno.mensagemSucesso, null, "right", 30, 300);
+            }
+            if (retorno.mensagemErro !== "") {
+                Notificacao(retorno.mensagemErro, null, null, "right", 30, 300);
+            }
+            if (retorno.mensagemAlerta !== "") {
+                Notificacao(null, null, retorno.mensagemAlerta, "right", 30, 300);
+            }
+            LimparTudo();
         }
     });
 }

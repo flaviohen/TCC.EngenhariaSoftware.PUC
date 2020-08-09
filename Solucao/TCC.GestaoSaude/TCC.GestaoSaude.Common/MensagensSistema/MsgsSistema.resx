@@ -135,6 +135,12 @@
   <data name="MsgProntuarioAtualizado" xml:space="preserve">
     <value>Prontuario atualizado com sucesso!</value>
   </data>
+  <data name="MsgProntuarioCadastrado" xml:space="preserve">
+    <value>Prontuario cadastrado com sucesso</value>
+  </data>
+  <data name="MsgProntuarioNaoCadastrado" xml:space="preserve">
+    <value>Não foi possivel cadastrar o prontuário para o atendimento.</value>
+  </data>
   <data name="MsgProntuarioNaoEncontrado" xml:space="preserve">
     <value>Prontuario não encontrado</value>
   </data>
