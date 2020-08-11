@@ -30,6 +30,7 @@
                         <div class="span3">
                             <label for="ddlTipoEstabelecimento"><b>Tipo Estabelecimento</b> </label>
                             <select id="ddlTipoEstabelecimento" class="span12">
+                                <option value="0">Selecione</option>
                                 @foreach (A20TipoEstabelecimento item in (List<A20TipoEstabelecimento>)ViewBag.TiposEstabelecimento)
                                 {
                                     <option value="@item.A20TipoEstabelecimentoId">@item.A20TipoEstabelecimentoDescricao</option>
@@ -67,7 +68,7 @@
                 <div class="widget-content">
                     <div class="controls controls-row">
                         <div class="span12" id="tableEstabelecimento">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -104,7 +105,7 @@
                         </div>
                         <div class="span6">
                             <label for="txtCNPJ">CNPJ:</label>
-                            <input type="text" id="txtCNPJ"class="span12" value="" />
+                            <input type="text" id="txtCNPJ" class="span12" value="" />
                         </div>
                     </div>
                     <div class="controls controls-row">
@@ -114,7 +115,7 @@
                         </div>
                         <div class="span6">
                             <label for="txtNomeFantasia">Nome Fantasia:</label>
-                            <input type="text" id="txtNomeFantasia"class="span12" value="" />
+                            <input type="text" id="txtNomeFantasia" class="span12" value="" />
                         </div>
                     </div>
                     <div class="controls controls-row">
@@ -178,7 +179,7 @@
                     </div>
                     <div class="controls controls-row">
                         <div class="span3" style="float:right;">
-                            <button type="button" id="btnCadastrarEstabelecimento"  class="btn btn-primary span12">Cadastrar</button>
+                            <button type="button" id="btnCadastrarEstabelecimento" class="btn btn-primary span12">Cadastrar</button>
                         </div>
                     </div>
                 </div>
@@ -186,12 +187,167 @@
         </div>
     </div>
 
+    <div id="ModalDetalhes" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Detalhes do estabelecimento</h3>
+        </div>
+        <div class="modal-body">
+            <div class="widget-content">
+                <div class="controls control-ro">
+                    <div id="aqui">
+
+                    </div>
+                </div>
+                <div class="controls controls-row">
+                    <div class="span2">
+                        <label><b>Tipo de Estabelecimento: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblTipoEstabelecimento"></label>
+                    </div>
+                    <div class="span2">
+                        <label><b>Codigo da Unidade: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblCodigoUnidade"></label>
+                    </div>
+                </div>
+                <div class="controls controls-row">
+                    <div class="span2">
+                        <label><b>Codigo CNES: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblCodigoCNES"></label>
+                    </div>
+                    <div class="span2">
+                        <label><b>CNPJ: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblCNPJ"></label>
+                    </div>
+                </div>
+                <div class="controls controls-row">
+                    <div class="span2">
+                        <label><b>Razão Social: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblRazaoSocial"></label>
+                    </div>
+                    <div class="span2">
+                        <label><b>Nome Fantasia: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblNomeFantasia"></label>
+                    </div>
+                </div>
+                <div class="controls controls-row">
+                    <div class="span2">
+                        <label><b>Logradouro: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblLogradouro"></label>
+                    </div>
+                    <div class="span2">
+                        <label><b>Endereço: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblEndereco"></label>
+                    </div>
+                    
+                </div>
+                <div class="controls controls-row">
+                    <div class="span2">
+                        <label><b>Número: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblNumero"></label>
+                    </div>
+                    <div class="span2">
+                        <label><b>Complemento: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblComplemento"></label>
+                    </div>
+                </div>
+                <div class="controls controls-row">
+                    <div class="span2">
+                        <label><b>Bairro: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblBairro"></label>
+                    </div>
+                    <div class="span2">
+                        <label><b>CEP: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblCep"></label>
+                    </div>
+                </div>
+                <div class="controls controls-row">
+                    <div class="span2">
+                        <label><b>Telefone: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblTelefone"></label>
+                    </div>
+                    <div class="span2">
+                        <label><b>FAX: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblFax"></label>
+                    </div> 
+                </div>
+                <div class="controls controls-row">
+                    <div class="span2">
+                        <label><b>E-mail: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblEmail"></label>
+                    </div>
+                </div>
+                <div class="controls controls-row">
+                    <div class="span2">
+                        <label><b>Latitude: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblLatitude"></label>
+                    </div>
+                    <div class="span2">
+                        <label><b>Longitude: </b></label>
+                    </div>
+                    <div class="span2">
+                        <label id="lblLongitude"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        </div>
+    </div>
+
+    <div id="ModalDeletar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Confirmação de exclusão de estabelecimento</h3>
+        </div>
+        <div class="modal-body">
+            <p>Confirma a exclusão do estabelecimento selecionado?</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" id="btnNao" data-dismiss="modal" aria-hidden="true">Não</button>
+            <button type="button" id="btnDeletar" class="btn btn-primary">Sim</button>
+            <input type="hidden"  id="hdnIDExcluir" name="name" value="0" />
+        </div>
+    </div>
 </div>
 <script>
 
     var urlPesquisarEstabelecimento = '@Url.Action("PesquisarEstabelecimento", "Estabelecimento")';
-    var urlEditar = '@Url.Action("EditarEstabelecimento","Estabelecimento")';
+    var urlDetalhe = '@Url.Action("DetalhesEstabelecimento","Estabelecimento")';
     var urlDeletar = '@Url.Action("DeletarEstabelecimento","Estabelecimento")';
+    var urlCadastrarEstabelecimento = '@Url.Action("CadastrarEstabelecimento","Estabelecimento")';
 
     $(document).ready(function () {
         $("#FormularioNovoEstabelecimento").hide();
@@ -200,13 +356,22 @@
         $("#btnPesquisarEstabelecimento").click(function () {
             let tpEstabelecimento = $("#ddlTipoEstabelecimento").val();
             let numCep = $("#txtCep").val();
-            let numeroCNES = $("txtNumeroCNES").val();
-            PesquisarEstabelecimento(tpEstabelecimento, numCep, numeroCNES, urlPesquisarEstabelecimento, urlDeletar, urlEditar);
+            let numeroCNES = $("#txtNumeroCNES").val();
+            PesquisarEstabelecimento(tpEstabelecimento, numCep, numeroCNES, urlPesquisarEstabelecimento, urlDetalhe);
         });
 
         $("#btnAdicionarNovoEstabelecimento").click(function () {
             $("#TabelaEstabelecimentos").hide();
             $("#FormularioNovoEstabelecimento").show();
+        });
+
+        $("#btnCadastrarEstabelecimento").click(function () {
+            CadastrarNovoEstabelecimento(urlCadastrarEstabelecimento);
+        });
+
+        $("#btnDeletar").click(function () {
+            DeletarEstabelecimento($("#hdnIDExcluir").val(), urlDeletar);
+            $("#btnNao").click();
         });
     });
 </script>

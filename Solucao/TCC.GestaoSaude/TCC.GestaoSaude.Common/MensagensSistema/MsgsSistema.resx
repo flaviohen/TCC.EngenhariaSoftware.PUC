@@ -120,6 +120,12 @@
   <data name="MsgAtendimentoNaoEncontrado" xml:space="preserve">
     <value>Numero de Atendimento não encontrado</value>
   </data>
+  <data name="MsgEstabelecimentoCadastradoSucesso" xml:space="preserve">
+    <value>Estabelecimento cadastrado com sucesso.</value>
+  </data>
+  <data name="MSgEstabelecimentoExcluidoSucesso" xml:space="preserve">
+    <value>Estabelecimento excluido com sucesso!</value>
+  </data>
   <data name="MsgEstabelecimentoExistente" xml:space="preserve">
     <value>Já existe estabelecimento cadastrado com este codigo de estabelecimento</value>
   </data>
@@ -128,6 +134,9 @@
   </data>
   <data name="MsgNaoExisteEstabelecimento" xml:space="preserve">
     <value>Não existe estabelecimento para o codigo informado.</value>
+  </data>
+  <data name="MSgNaoPossivelExclusaoEstabelecimento" xml:space="preserve">
+    <value>Não é possivel excluir este estabelecimento.</value>
   </data>
   <data name="MsgPerfilExistente" xml:space="preserve">
     <value>O perfil informado já existe no sistema.</value>

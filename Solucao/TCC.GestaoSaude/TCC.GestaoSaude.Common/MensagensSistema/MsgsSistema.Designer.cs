@@ -70,6 +70,24 @@ namespace TCC.GestaoSaude.Common.MensagensSistema {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Estabelecimento cadastrado com sucesso..
+        /// </summary>
+        public static string MsgEstabelecimentoCadastradoSucesso {
+            get {
+                return ResourceManager.GetString("MsgEstabelecimentoCadastradoSucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Estabelecimento excluido com sucesso!.
+        /// </summary>
+        public static string MSgEstabelecimentoExcluidoSucesso {
+            get {
+                return ResourceManager.GetString("MSgEstabelecimentoExcluidoSucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Já existe estabelecimento cadastrado com este codigo de estabelecimento.
         /// </summary>
         public static string MsgEstabelecimentoExistente {
@@ -93,6 +111,15 @@ namespace TCC.GestaoSaude.Common.MensagensSistema {
         public static string MsgNaoExisteEstabelecimento {
             get {
                 return ResourceManager.GetString("MsgNaoExisteEstabelecimento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não é possivel excluir este estabelecimento..
+        /// </summary>
+        public static string MSgNaoPossivelExclusaoEstabelecimento {
+            get {
+                return ResourceManager.GetString("MSgNaoPossivelExclusaoEstabelecimento", resourceCulture);
             }
         }
         

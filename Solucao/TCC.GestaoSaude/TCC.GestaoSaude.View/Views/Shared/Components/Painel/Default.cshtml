@@ -1,0 +1,15 @@
+﻿@model TCC.GestaoSaude.View.Models.MenuViewModel
+
+<!--Action boxes-->
+<div class="container-fluid">
+    <div class="quick-actions_homepage">
+        <ul class="quick-actions">
+            @foreach (var item in Model.items)
+            {
+                <li class="bg_lb"> <a asp-action="@item.Acao" asp-controller="@item.Controller"> <i class="@item.Icone"></i>@item.TextoMenu</a> </li>
+            }
+        </ul>
+    </div>
+    <!--End-Action boxes-->
+    <hr />
+</div>

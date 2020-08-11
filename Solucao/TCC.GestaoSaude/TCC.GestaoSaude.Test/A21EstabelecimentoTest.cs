@@ -62,7 +62,7 @@ namespace TCC.GestaoSaude.Test
 			estabelecimento.A21EstabelecimentoRazaoSocial = "SECRETARIA MUNICIPAL DE SAUDE DE BARRA MANSA";
 			estabelecimento.A21EstabelecimentoTelefone = "(24)33229192";
 
-			var resultado = new A21EstabelecimentoBusiness(_estabelecimentoRepositorio).CadastrarEstabelecimento(estabelecimento);
+			var resultado = new A21EstabelecimentoBusiness(_estabelecimentoRepositorio, _tipoEstabelecimentoRepositorio).CadastrarEstabelecimento(estabelecimento);
 			
 			Assert.True(resultado);
 		}
@@ -74,7 +74,7 @@ namespace TCC.GestaoSaude.Test
 			var numeroCep = "27350000";
 			var codigoEstabelecimento = "2289105";
 
-			var lstEstabelecimentos = new A21EstabelecimentoBusiness(_estabelecimentoRepositorio).BuscarEstabelecimento(tipoEstabelecimento, numeroCep, codigoEstabelecimento);
+			var lstEstabelecimentos = new A21EstabelecimentoBusiness(_estabelecimentoRepositorio,_tipoEstabelecimentoRepositorio).BuscarEstabelecimento(tipoEstabelecimento, numeroCep, codigoEstabelecimento);
 
 			Assert.True(lstEstabelecimentos.Count > 0);
 		}
@@ -84,7 +84,7 @@ namespace TCC.GestaoSaude.Test
 		{
 			var estabelecimentoID = _estabelecimentoRepositorio.GetAll().First().A21EstabelecimentoId;
 
-			var resultado = new A21EstabelecimentoBusiness(_estabelecimentoRepositorio).ExcluirEstabelecimento(estabelecimentoID);
+			var resultado = new A21EstabelecimentoBusiness(_estabelecimentoRepositorio,_tipoEstabelecimentoRepositorio).ExcluirEstabelecimento(estabelecimentoID);
 
 			Assert.True(resultado);
 		}
@@ -94,7 +94,7 @@ namespace TCC.GestaoSaude.Test
 		{
 			var estabelecimentoID = _estabelecimentoRepositorio.GetAll().First().A21EstabelecimentoId;
 
-			var resultado = new A21EstabelecimentoBusiness(_estabelecimentoRepositorio).BuscarEstabelecimentoPorCodigo(estabelecimentoID);
+			var resultado = new A21EstabelecimentoBusiness(_estabelecimentoRepositorio,_tipoEstabelecimentoRepositorio).BuscarEstabelecimentoPorCodigo(estabelecimentoID);
 
 			Assert.True(resultado != null);
 		}

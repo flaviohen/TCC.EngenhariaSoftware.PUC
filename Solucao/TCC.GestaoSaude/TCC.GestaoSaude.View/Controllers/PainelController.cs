@@ -57,7 +57,7 @@ namespace TCC.GestaoSaude.View.Controllers
 		}
 
 		public IActionResult PaginaInicial()
-		{
+		{	
 			ViewBag.Session = _sessao;
 			return View();
 		}

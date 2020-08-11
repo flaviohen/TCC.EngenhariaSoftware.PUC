@@ -15,7 +15,8 @@ namespace TCC.GestaoSaude.View.SessionCustom
 		UsuarioInterno,
 		RegistroEvolucaoEnfermagem,
 		IDProntuario,
-		IDAtendimento
+		IDAtendimento,
+		ItensMenu
 	}
 	public class Sessao : Controller
 	{
@@ -91,6 +92,17 @@ namespace TCC.GestaoSaude.View.SessionCustom
 			}
 		}
 
+		public List<ItemMenu> ItensMenu 
+		{
+			get
+			{
+				return _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<ItemMenu>>(NomeSessao.ItensMenu.ToString());
+			}
+			set
+			{
+				_httpContextAccessor.HttpContext.Session.SetObjectAsJson(NomeSessao.ItensMenu.ToString(), value);
+			}
+		}
 		public static bool ValidarExistirUsuarioSessao(IHttpContextAccessor httpContextAccessor)
 		{
 			Sessao sessi = new Sessao(httpContextAccessor);

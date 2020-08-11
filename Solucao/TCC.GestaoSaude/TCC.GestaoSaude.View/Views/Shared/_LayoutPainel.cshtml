@@ -1,5 +1,6 @@
 ﻿@{
     var informacaoUsuario = TCC.GestaoSaude.View.SessionCustom.Sessao.RetornarInformacaoUsuario(ViewBag.Session);
+    ViewBag.ItensMenu = ViewBag.Session.ItensMenu;
 }
 
 <!DOCTYPE html>
@@ -25,11 +26,7 @@
 </head>
 <body>
     <!--Header-part-->
-    <div id="header">
-        <div style="float: left; text-align: center; font-size: 20px; padding-top: 10px; font-family: Arial; width: 200px; color: white;">
-            <p>Sistema</p>
-            <p>Gestão de Saúde</p>
-        </div>
+    <div id="header"> 
     </div>
     <!--close-Header-part-->
     <!--top-Header-menu-->
@@ -75,7 +72,7 @@
     <!--end-Footer-part-->
 
 
-    
+
     <script src="~/js/Matrix/excanvas.min.js"></script>
     <script src="~/js/Matrix/jquery.ui.custom.js"></script>
     <script src="~/js/Matrix/bootstrap.min.js"></script>

@@ -11,10 +11,11 @@ namespace TCC.GestaoSaude.Business
 	public class A21EstabelecimentoBusiness
 	{
 		private readonly IA21EstabelecimentoRepositorio _estabelecimentoRepositorio;
-
-		public A21EstabelecimentoBusiness(IA21EstabelecimentoRepositorio estabelecimentoRepositorio)
+		private readonly IA20TipoEstabelecimentoRepositorio _tipoEstabelecimentoRepositorio;
+		public A21EstabelecimentoBusiness(IA21EstabelecimentoRepositorio estabelecimentoRepositorio, IA20TipoEstabelecimentoRepositorio tipoEstabelecimentoRepositorio)
 		{
 			_estabelecimentoRepositorio = estabelecimentoRepositorio;
+			_tipoEstabelecimentoRepositorio = tipoEstabelecimentoRepositorio;
 		}
 
 		public bool CadastrarEstabelecimento(A21Estabelecimento estabelecimento)
@@ -45,8 +46,23 @@ namespace TCC.GestaoSaude.Business
 		{
 			try
 			{
-				var resultado = _estabelecimentoRepositorio.FindAll(c => c.A20TipoEstabelecimento == tipoEstabelecimento || c.A21EstabelecimentoCep == CepEstabelecimento || c.A21EstabelecimentoCodigoEstabelecimento == codigoEstabelecimento);
-				return resultado.ToList();
+				List<A21Estabelecimento> resultado = new List<A21Estabelecimento>();
+				if (tipoEstabelecimento != null && string.IsNullOrEmpty(CepEstabelecimento) && !string.IsNullOrEmpty(codigoEstabelecimento))
+					resultado = _estabelecimentoRepositorio.FindAll(c => c.A20TipoEstabelecimento == tipoEstabelecimento && c.A21EstabelecimentoCodigoEstabelecimento == codigoEstabelecimento).ToList();
+				if (tipoEstabelecimento!= null && !string.IsNullOrEmpty(CepEstabelecimento) && string.IsNullOrEmpty(codigoEstabelecimento))
+					resultado = _estabelecimentoRepositorio.FindAll(c => c.A20TipoEstabelecimento == tipoEstabelecimento && c.A21EstabelecimentoCep == CepEstabelecimento).ToList();
+				if (tipoEstabelecimento != null && !string.IsNullOrEmpty(CepEstabelecimento) && !string.IsNullOrEmpty(codigoEstabelecimento))
+					resultado = _estabelecimentoRepositorio.FindAll(c => c.A20TipoEstabelecimento == tipoEstabelecimento && c.A21EstabelecimentoCep == CepEstabelecimento && c.A21EstabelecimentoCodigoEstabelecimento == codigoEstabelecimento).ToList();
+				if ( tipoEstabelecimento != null && string.IsNullOrEmpty(CepEstabelecimento) && string.IsNullOrEmpty(codigoEstabelecimento))
+					resultado = _estabelecimentoRepositorio.FindAll(c => c.A20TipoEstabelecimento == tipoEstabelecimento).ToList();
+				if (tipoEstabelecimento == null && string.IsNullOrEmpty(CepEstabelecimento) && !string.IsNullOrEmpty(codigoEstabelecimento))
+					resultado = _estabelecimentoRepositorio.FindAll(c => c.A21EstabelecimentoCodigoEstabelecimento == codigoEstabelecimento).ToList();
+				if (tipoEstabelecimento == null && !string.IsNullOrEmpty(CepEstabelecimento) && string.IsNullOrEmpty(codigoEstabelecimento))
+					resultado = _estabelecimentoRepositorio.FindAll(c => c.A21EstabelecimentoCep == CepEstabelecimento).ToList();
+				if (tipoEstabelecimento == null && !string.IsNullOrEmpty(CepEstabelecimento) && !string.IsNullOrEmpty(codigoEstabelecimento))
+					resultado = _estabelecimentoRepositorio.FindAll(c => c.A21EstabelecimentoCep == CepEstabelecimento && c.A21EstabelecimentoCodigoEstabelecimento == codigoEstabelecimento).ToList();
+				
+			    return resultado;
 			}
 			catch (Exception)
 			{
@@ -83,6 +99,7 @@ namespace TCC.GestaoSaude.Business
 				estabelecimento = _estabelecimentoRepositorio.Get(idEstabelecimento);
 				if (estabelecimento != null)
 				{
+					estabelecimento.A20TipoEstabelecimento = new A20TipoEstabelecimentoBusiness(_tipoEstabelecimentoRepositorio).RetornarTiposEstabelecimento().FirstOrDefault(c => c.A20TipoEstabelecimentoId == estabelecimento.A20TipoEstabelecimentoId);
 					return estabelecimento;
 				}
 				else 
