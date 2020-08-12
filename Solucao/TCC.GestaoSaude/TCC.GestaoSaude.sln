@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.GestaoSaude.Test", "TCC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.GestaoSaude.Common", "TCC.GestaoSaude.Common\TCC.GestaoSaude.Common.csproj", "{B113D1FD-959A-4EA0-8E18-ED175453340C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.GestaoSaude.View", "TCC.GestaoSaude.View\TCC.GestaoSaude.View.csproj", "{50888D79-82EE-4A66-BC19-FC1E29FE6910}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.GestaoSaude.View", "TCC.GestaoSaude.View\TCC.GestaoSaude.View.csproj", "{50888D79-82EE-4A66-BC19-FC1E29FE6910}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
